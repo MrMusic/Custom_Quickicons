@@ -336,6 +336,17 @@ class CustomQuickIconHelper
                 ];
             }
 
+            if ($params->get('show_redirects')) {
+                $this->buttons[$key][] = [
+                    'image' => 'fas fa-retweet',
+                    'link' => Route::_('index.php?option=com_redirect'),
+                    'linkadd' => Route::_('index.php?option=com_redirect&view=link&layout=edit'),
+                    'name' => 'MOD_CUSTOM_QUICKICON_REDIRECTS',
+                    'access' => array('core.admin', 'com_redirect'),
+                    'group' => $context
+                ];
+            }
+
             if ($params->get('show_checkin')) {
                 $quickicon = [
                     'image' => 'icon-unlock-alt',
