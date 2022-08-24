@@ -389,121 +389,223 @@ class CustomQuickIconHelper
                 ];
             }
 
-            // HIKASHOP DEFAULT QUICKICONS
-            if ($params->get('show_hikashop_dashboard')) {
-                $this->buttons[$key][] = [
-                    'image' => 'icon-cart',
-                    'link' => Route::_('index.php?option=com_hikashop'),
-                    'name' => 'MOD_CUSTOM_QUICKICON_HIKASHOP',
-                    'group' => $context,
-                ];
+
+            // HIKASHOP QUICKICONS
+            if ($params->get('ecommerce_component') == "HikaShop") {
+                if ($params->get('show_hikashop_dashboard')) {
+                    $this->buttons[$key][] = [
+                        'image' => 'icon-cart',
+                        'link' => Route::_('index.php?option=com_hikashop'),
+                        'name' => 'MOD_CUSTOM_QUICKICON_HIKASHOP',
+                        'group' => $context,
+                    ];
+                }
+
+                if ($params->get('show_hikashop_products')) {
+                    $this->buttons[$key][] = [
+                        'image' => 'icon-cubes',
+                        'link' => Route::_('index.php?option=com_hikashop&ctrl=product'),
+                        'linkadd' => Route::_('index.php?option=com_hikashop&ctrl=product&task=add'),
+                        'name' => 'MOD_CUSTOM_QUICKICON_PRODUCTS',
+                        'group' => $context,
+                    ];
+                }
+
+                if ($params->get('show_hikashop_categories')) {
+                    $this->buttons[$key][] = [
+                        'image' => 'icon-folder',
+                        'link' => Route::_('index.php?option=com_hikashop&ctrl=category'),
+                        'linkadd' => Route::_('index.php?option=com_hikashop&ctrl=category&task=add'),
+                        'name' => 'MOD_CUSTOM_QUICKICON_CATEGORIES',
+                        'group' => $context,
+                    ];
+                }
+
+                if ($params->get('show_hikashop_users')) {
+                    $this->buttons[$key][] = [
+                        'image' => 'icon-user',
+                        'link' => Route::_('index.php?option=com_hikashop&ctrl=user&filter_partner=0'),
+                        'name' => 'MOD_CUSTOM_QUICKICON_USERS',
+                        'group' => $context,
+                    ];
+                }
+
+                if ($params->get('show_hikashop_orders')) {
+                    $this->buttons[$key][] = [
+                        'image' => 'icon-credit',
+                        'link' => Route::_('index.php?option=com_hikashop&ctrl=order'),
+                        'linkadd' => Route::_('index.php?option=com_hikashop&ctrl=order&task=neworder'),
+                        'name' => 'MOD_CUSTOM_QUICKICON_ORDERS',
+                        'group' => $context,
+                    ];
+                }
+
+                if ($params->get('show_hikashop_discounts')) {
+                    $this->buttons[$key][] = [
+                        'image' => 'icon-tag',
+                        'link' => Route::_('index.php?option=com_hikashop&ctrl=discount&filter_type=discount'),
+                        'linkadd' => Route::_('index.php?option=com_hikashop&ctrl=discount&discount_type=discount&task=add'),
+                        'name' => 'MOD_CUSTOM_QUICKICON_DISCOUNTS',
+                        'group' => $context,
+                    ];
+                }
+
+                if ($params->get('show_hikashop_coupons')) {
+                    $this->buttons[$key][] = [
+                        'image' => 'icon-tags-2',
+                        'link' => Route::_('index.php?option=com_hikashop&ctrl=discount&filter_type=coupon'),
+                        'linkadd' => Route::_('index.php?option=com_hikashop&ctrl=discount&discount_type=coupon&task=add'),
+                        'name' => 'MOD_CUSTOM_QUICKICON_COUPONS',
+                        'group' => $context,
+                    ];
+                }
+
+                if ($params->get('show_hikashop_carts')) {
+                    $this->buttons[$key][] = [
+                        'image' => 'icon-basket',
+                        'link' => Route::_('index.php?option=com_hikashop&ctrl=cart&cart_type=cart'),
+                        'linkadd' => Route::_('index.php?option=com_hikashop&ctrl=cart&cart_type=cart&task=add'),
+                        'name' => 'MOD_CUSTOM_QUICKICON_CARTS',
+                        'group' => $context,
+                    ];
+                }
+
+                if ($params->get('show_hikashop_wishlist')) {
+                    $this->buttons[$key][] = [
+                        'image' => 'icon-heart-2',
+                        'link' => Route::_('index.php?option=com_hikashop&ctrl=cart&cart_type=wishlist'),
+                        'linkadd' => Route::_('index.php?option=com_hikashop&ctrl=cart&cart_type=wishlist&task=add'),
+                        'name' => 'MOD_CUSTOM_QUICKICON_WISHLIST',
+                        'group' => $context,
+                    ];
+                }
+
+                if ($params->get('show_hikashop_waitlist')) {
+                    $this->buttons[$key][] = [
+                        'image' => 'icon-clock',
+                        'link' => Route::_('index.php?option=com_hikashop&ctrl=waitlist'),
+                        'linkadd' => Route::_('index.php?option=com_hikashop&ctrl=waitlist&task=add'),
+                        'name' => 'MOD_CUSTOM_QUICKICON_WAITLIST',
+                        'group' => $context,
+                    ];
+                }
+
+                if ($params->get('show_hikashop_emailhistory')) {
+                    $this->buttons[$key][] = [
+                        'image' => 'icon-envelope-opened',
+                        'link' => Route::_('index.php?option=com_hikashop&ctrl=email_history'),
+                        'name' => 'MOD_CUSTOM_QUICKICON_EMAILHISTORY',
+                        'group' => $context,
+                    ];
+                }
+
+                if ($params->get('show_hikashop_config')) {
+                    $this->buttons[$key][] = [
+                        'image' => 'icon-wrench',
+                        'link' => Route::_('index.php?option=com_hikashop&ctrl=config'),
+                        'name' => 'MOD_CUSTOM_QUICKICON_CONFIGURATION',
+                        'group' => $context,
+                    ];
+                }
             }
 
-            if ($params->get('show_hikashop_products')) {
-                $this->buttons[$key][] = [
-                    'image' => 'icon-cubes',
-                    'link' => Route::_('index.php?option=com_hikashop&ctrl=product'),
-                    'linkadd' => Route::_('index.php?option=com_hikashop&ctrl=product&task=add'),
-                    'name' => 'MOD_CUSTOM_QUICKICON_PRODUCTS',
-                    'group' => $context,
-                ];
-            }
 
-            if ($params->get('show_hikashop_categories')) {
-                $this->buttons[$key][] = [
-                    'image' => 'icon-folder',
-                    'link' => Route::_('index.php?option=com_hikashop&ctrl=category'),
-                    'linkadd' => Route::_('index.php?option=com_hikashop&ctrl=category&task=add'),
-                    'name' => 'MOD_CUSTOM_QUICKICON_CATEGORIES',
-                    'group' => $context,
-                ];
-            }
 
-            if ($params->get('show_hikashop_users')) {
-                $this->buttons[$key][] = [
-                    'image' => 'icon-user',
-                    'link' => Route::_('index.php?option=com_hikashop&ctrl=user&filter_partner=0'),
-                    'name' => 'MOD_CUSTOM_QUICKICON_USERS',
-                    'group' => $context,
-                ];
-            }
+            // VIRTUEMART QUICKICONS
+            if ($params->get('ecommerce_component') == "Virtuemart") {
+                if ($params->get('show_virtuemart_products')) {
+                    $this->buttons[$key][] = [
+                        'image' => 'icon-cubes',
+                        'link' => Route::_('index.php?option=com_virtuemart&view=product'),
+                        'linkadd' => Route::_('index.php?option=com_virtuemart&view=product&task=add'),
+                        'name' => 'MOD_CUSTOM_QUICKICON_PRODUCTS',
+                        'group' => $context,
+                    ];
+                }
 
-            if ($params->get('show_hikashop_orders')) {
-                $this->buttons[$key][] = [
-                    'image' => 'icon-credit',
-                    'link' => Route::_('index.php?option=com_hikashop&ctrl=order'),
-                    'linkadd' => Route::_('index.php?option=com_hikashop&ctrl=order&task=neworder'),
-                    'name' => 'MOD_CUSTOM_QUICKICON_ORDERS',
-                    'group' => $context,
-                ];
-            }
+                if ($params->get('show_virtuemart_categories')) {
+                    $this->buttons[$key][] = [
+                        'image' => 'icon-folder',
+                        'link' => Route::_('index.php?option=com_virtuemart&view=category'),
+                        'linkadd' => Route::_('index.php?option=com_virtuemart&view=category&task=add'),
+                        'name' => 'MOD_CUSTOM_QUICKICON_CATEGORIES',
+                        'group' => $context,
+                    ];
+                }
 
-            if ($params->get('show_hikashop_discounts')) {
-                $this->buttons[$key][] = [
-                    'image' => 'icon-tag',
-                    'link' => Route::_('index.php?option=com_hikashop&ctrl=discount&filter_type=discount'),
-                    'linkadd' => Route::_('index.php?option=com_hikashop&ctrl=discount&discount_type=discount&task=add'),
-                    'name' => 'MOD_CUSTOM_QUICKICON_DISCOUNTS',
-                    'group' => $context,
-                ];
-            }
+                if ($params->get('show_virtuemart_shoppers')) {
+                    $this->buttons[$key][] = [
+                        'image' => 'icon-user',
+                        'link' => Route::_('index.php?option=com_virtuemart&view=user'),
+                        'name' => 'MOD_CUSTOM_QUICKICON_USERS',
+                        'group' => $context,
+                    ];
+                }
 
-            if ($params->get('show_hikashop_coupons')) {
-                $this->buttons[$key][] = [
-                    'image' => 'icon-tags-2',
-                    'link' => Route::_('index.php?option=com_hikashop&ctrl=discount&filter_type=coupon'),
-                    'linkadd' => Route::_('index.php?option=com_hikashop&ctrl=discount&discount_type=coupon&task=add'),
-                    'name' => 'MOD_CUSTOM_QUICKICON_COUPONS',
-                    'group' => $context,
-                ];
-            }
+                if ($params->get('show_virtuemart_orders')) {
+                    $this->buttons[$key][] = [
+                        'image' => 'icon-credit',
+                        'link' => Route::_('index.php?option=com_virtuemart&view=orders'),
+                        'name' => 'MOD_CUSTOM_QUICKICON_ORDERS',
+                        'group' => $context,
+                    ];
+                }
 
-            if ($params->get('show_hikashop_carts')) {
-                $this->buttons[$key][] = [
-                    'image' => 'icon-basket',
-                    'link' => Route::_('index.php?option=com_hikashop&ctrl=cart&cart_type=cart'),
-                    'linkadd' => Route::_('index.php?option=com_hikashop&ctrl=cart&cart_type=cart&task=add'),
-                    'name' => 'MOD_CUSTOM_QUICKICON_CARTS',
-                    'group' => $context,
-                ];
-            }
+                if ($params->get('show_virtuemart_coupons')) {
+                    $this->buttons[$key][] = [
+                        'image' => 'icon-tags-2',
+                        'link' => Route::_('index.php?option=com_virtuemart&view=coupon'),
+                        'linkadd' => Route::_('index.php?option=com_virtuemart&view=coupon&task=add'),
+                        'name' => 'MOD_CUSTOM_QUICKICON_COUPONS',
+                        'group' => $context,
+                    ];
+                }
 
-            if ($params->get('show_hikashop_wishlist')) {
-                $this->buttons[$key][] = [
-                    'image' => 'icon-heart-2',
-                    'link' => Route::_('index.php?option=com_hikashop&ctrl=cart&cart_type=wishlist'),
-                    'linkadd' => Route::_('index.php?option=com_hikashop&ctrl=cart&cart_type=wishlist&task=add'),
-                    'name' => 'MOD_CUSTOM_QUICKICON_WISHLIST',
-                    'group' => $context,
-                ];
-            }
+                if ($params->get('show_virtuemart_reviews')) {
+                    $this->buttons[$key][] = [
+                        'image' => 'icon-star',
+                        'link' => Route::_('index.php?option=com_virtuemart&view=ratings'),
+                        'name' => 'MOD_CUSTOM_QUICKICON_REVIEWS',
+                        'group' => $context,
+                    ];
+                }
 
-            if ($params->get('show_hikashop_waitlist')) {
-                $this->buttons[$key][] = [
-                    'image' => 'icon-clock',
-                    'link' => Route::_('index.php?option=com_hikashop&ctrl=waitlist'),
-                    'linkadd' => Route::_('index.php?option=com_hikashop&ctrl=waitlist&task=add'),
-                    'name' => 'MOD_CUSTOM_QUICKICON_WAITLIST',
-                    'group' => $context,
-                ];
-            }
+                if ($params->get('show_virtuemart_manufacturers')) {
+                    $this->buttons[$key][] = [
+                        'image' => 'fas fa-industry',
+                        'link' => Route::_('index.php?option=com_virtuemart&view=manufacturer'),
+                        'linkadd' => Route::_('index.php?option=com_virtuemart&view=manufacturer&task=add'),
+                        'name' => 'MOD_CUSTOM_QUICKICON_MANUFACTURERS',
+                        'group' => $context,
+                    ];
+                }
 
-            if ($params->get('show_hikashop_emailhistory')) {
-                $this->buttons[$key][] = [
-                    'image' => 'icon-envelope-opened',
-                    'link' => Route::_('index.php?option=com_hikashop&ctrl=email_history'),
-                    'name' => 'MOD_CUSTOM_QUICKICON_EMAILHISTORY',
-                    'group' => $context,
-                ];
-            }
+                if ($params->get('show_virtuemart_salesreport')) {
+                    $this->buttons[$key][] = [
+                        'image' => 'far fa-chart-bar',
+                        'link' => Route::_('index.php?option=com_virtuemart&view=report'),
+                        'name' => 'MOD_CUSTOM_QUICKICON_SALESREPORT',
+                        'group' => $context,
+                    ];
+                }
 
-            if ($params->get('show_hikashop_config')) {
-                $this->buttons[$key][] = [
-                    'image' => 'icon-wrench',
-                    'link' => Route::_('index.php?option=com_hikashop&ctrl=config'),
-                    'name' => 'MOD_CUSTOM_QUICKICON_CONFIGURATION',
-                    'group' => $context,
-                ];
+                if ($params->get('show_virtuemart_inventory')) {
+                    $this->buttons[$key][] = [
+                        'image' => 'fas fa-barcode',
+                        'link' => Route::_('index.php?option=com_virtuemart&view=inventory'),
+                        'name' => 'MOD_CUSTOM_QUICKICON_INVENTORY',
+                        'group' => $context,
+                    ];
+                }
+
+                if ($params->get('show_virtuemart_config')) {
+                    $this->buttons[$key][] = [
+                        'image' => 'icon-wrench',
+                        'link' => Route::_('index.php?option=com_virtuemart&view=config'),
+                        'name' => 'MOD_CUSTOM_QUICKICON_CONFIGURATION',
+                        'group' => $context,
+                    ];
+                }
             }
 
             // CUSTOM QUICKICONS
