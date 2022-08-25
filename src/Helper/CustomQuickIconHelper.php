@@ -669,114 +669,6 @@ class CustomQuickIconHelper
             }
 
 
-            // J2STORE QUICKICONS
-            if ($params->get('ecommerce_component') == "J2Store") {
-                if ($params->get('show_j2store_dashboard')) {
-                    $this->buttons[$key][] = [
-                        'image' => 'icon-cart',
-                        'link' => Route::_('index.php?option=com_j2store'),
-                        'name' => 'MOD_CUSTOM_QUICKICON_J2STORE',
-                        'group' => $context,
-                    ];
-                }
-
-                if ($params->get('show_j2store_products')) {
-                    $this->buttons[$key][] = [
-                        'image' => 'icon-cubes',
-                        'link' => Route::_('index.php?option=com_j2store&view=products'),
-                        'linkadd' => Route::_('index.php?option=com_content&view=article&layout=edit'),
-                        'name' => 'MOD_CUSTOM_QUICKICON_PRODUCTS',
-                        'group' => $context,
-                    ];
-                }
-
-                if ($params->get('show_j2store_inventory')) {
-                    $this->buttons[$key][] = [
-                        'image' => 'fas fa-barcode',
-                        'link' => Route::_('index.php?option=com_j2store&view=inventories'),
-                        'name' => 'MOD_CUSTOM_QUICKICON_INVENTORY',
-                        'group' => $context,
-                    ];
-                }
-
-                if ($params->get('show_j2store_vendors')) {
-                    $this->buttons[$key][] = [
-                        'image' => 'fas fa-user-tag',
-                        'link' => Route::_('index.php?option=com_j2store&view=vendors'),
-                        'linkadd' => Route::_('index.php?option=com_j2store&view=vendors&task=add'),
-                        'name' => 'MOD_CUSTOM_QUICKICON_VENDORS',
-                        'group' => $context,
-                    ];
-                }
-
-                if ($params->get('show_j2store_manufacturers')) {
-                    $this->buttons[$key][] = [
-                        'image' => 'fas fa-industry',
-                        'link' => Route::_('index.php?option=com_j2store&view=manufacturers'),
-                        'linkadd' => Route::_('index.php?option=com_j2store&view=manufacturers&task=add'),
-                        'name' => 'MOD_CUSTOM_QUICKICON_MANUFACTURERS',
-                        'group' => $context,
-                    ];
-                }
-
-                if ($params->get('show_j2store_orders')) {
-                    $this->buttons[$key][] = [
-                        'image' => 'icon-credit',
-                        'link' => Route::_('index.php?option=com_j2store&view=orders'),
-                        'name' => 'MOD_CUSTOM_QUICKICON_ORDERS',
-                        'group' => $context,
-                    ];
-                }
-
-                if ($params->get('show_j2store_customers')) {
-                    $this->buttons[$key][] = [
-                        'image' => 'icon-user',
-                        'link' => Route::_('index.php?option=com_j2store&view=customers'),
-                        'name' => 'MOD_CUSTOM_QUICKICON_USERS',
-                        'group' => $context,
-                    ];
-                }
-
-                if ($params->get('show_j2store_coupons')) {
-                    $this->buttons[$key][] = [
-                        'image' => 'icon-tags-2',
-                        'link' => Route::_('index.php?option=com_j2store&view=coupons'),
-                        'linkadd' => Route::_('index.php?option=com_j2store&view=coupons&task=add'),
-                        'name' => 'MOD_CUSTOM_QUICKICON_COUPONS',
-                        'group' => $context,
-                    ];
-                }
-
-                if ($params->get('show_j2store_vouchers')) {
-                    $this->buttons[$key][] = [
-                        'image' => 'icon-tag',
-                        'link' => Route::_('index.php?option=com_j2store&view=vouchers'),
-                        'linkadd' => Route::_('index.php?option=com_j2store&view=vouchers&task=add'),
-                        'name' => 'MOD_CUSTOM_QUICKICON_VOUCHERS',
-                        'group' => $context,
-                    ];
-                }
-
-                if ($params->get('show_j2store_reports')) {
-                    $this->buttons[$key][] = [
-                        'image' => 'far fa-chart-bar',
-                        'link' => Route::_('index.php?option=com_j2store&view=reports'),
-                        'name' => 'MOD_CUSTOM_QUICKICON_REPORTS',
-                        'group' => $context,
-                    ];
-                }
-
-                if ($params->get('show_j2store_config')) {
-                    $this->buttons[$key][] = [
-                        'image' => 'icon-wrench',
-                        'link' => Route::_('index.php?option=com_j2store&view=configuration'),
-                        'name' => 'MOD_CUSTOM_QUICKICON_CONFIGURATION',
-                        'group' => $context,
-                    ];
-                }
-            }
-
-
             // HIKASHOP QUICKICONS
             if ((empty($params->get('ecommerce_component'))) || ($params->get('ecommerce_component') == "HikaShop")) {
                 if ($params->get('show_hikashop_dashboard')) {
@@ -896,6 +788,271 @@ class CustomQuickIconHelper
                 }
             }
 
+            // J2STORE QUICKICONS
+            if ($params->get('ecommerce_component') == "J2Store") {
+                if ($params->get('show_j2store_dashboard')) {
+                    $this->buttons[$key][] = [
+                        'image' => 'icon-cart',
+                        'link' => Route::_('index.php?option=com_j2store'),
+                        'name' => 'MOD_CUSTOM_QUICKICON_J2STORE',
+                        'group' => $context,
+                    ];
+                }
+
+                if ($params->get('show_j2store_products')) {
+                    $this->buttons[$key][] = [
+                        'image' => 'icon-cubes',
+                        'link' => Route::_('index.php?option=com_j2store&view=products'),
+                        'linkadd' => Route::_('index.php?option=com_content&view=article&layout=edit'),
+                        'name' => 'MOD_CUSTOM_QUICKICON_PRODUCTS',
+                        'group' => $context,
+                    ];
+                }
+
+                if ($params->get('show_j2store_inventory')) {
+                    $this->buttons[$key][] = [
+                        'image' => 'fas fa-barcode',
+                        'link' => Route::_('index.php?option=com_j2store&view=inventories'),
+                        'name' => 'MOD_CUSTOM_QUICKICON_INVENTORY',
+                        'group' => $context,
+                    ];
+                }
+
+                if ($params->get('show_j2store_vendors')) {
+                    $this->buttons[$key][] = [
+                        'image' => 'fas fa-user-tag',
+                        'link' => Route::_('index.php?option=com_j2store&view=vendors'),
+                        'linkadd' => Route::_('index.php?option=com_j2store&view=vendors&task=add'),
+                        'name' => 'MOD_CUSTOM_QUICKICON_VENDORS',
+                        'group' => $context,
+                    ];
+                }
+
+                if ($params->get('show_j2store_manufacturers')) {
+                    $this->buttons[$key][] = [
+                        'image' => 'fas fa-industry',
+                        'link' => Route::_('index.php?option=com_j2store&view=manufacturers'),
+                        'linkadd' => Route::_('index.php?option=com_j2store&view=manufacturers&task=add'),
+                        'name' => 'MOD_CUSTOM_QUICKICON_MANUFACTURERS',
+                        'group' => $context,
+                    ];
+                }
+
+                if ($params->get('show_j2store_orders')) {
+                    $this->buttons[$key][] = [
+                        'image' => 'icon-credit',
+                        'link' => Route::_('index.php?option=com_j2store&view=orders'),
+                        'name' => 'MOD_CUSTOM_QUICKICON_ORDERS',
+                        'group' => $context,
+                    ];
+                }
+
+                if ($params->get('show_j2store_customers')) {
+                    $this->buttons[$key][] = [
+                        'image' => 'icon-user',
+                        'link' => Route::_('index.php?option=com_j2store&view=customers'),
+                        'name' => 'MOD_CUSTOM_QUICKICON_USERS',
+                        'group' => $context,
+                    ];
+                }
+
+                if ($params->get('show_j2store_coupons')) {
+                    $this->buttons[$key][] = [
+                        'image' => 'icon-tags-2',
+                        'link' => Route::_('index.php?option=com_j2store&view=coupons'),
+                        'linkadd' => Route::_('index.php?option=com_j2store&view=coupons&task=add'),
+                        'name' => 'MOD_CUSTOM_QUICKICON_COUPONS',
+                        'group' => $context,
+                    ];
+                }
+
+                if ($params->get('show_j2store_vouchers')) {
+                    $this->buttons[$key][] = [
+                        'image' => 'icon-tag',
+                        'link' => Route::_('index.php?option=com_j2store&view=vouchers'),
+                        'linkadd' => Route::_('index.php?option=com_j2store&view=vouchers&task=add'),
+                        'name' => 'MOD_CUSTOM_QUICKICON_VOUCHERS',
+                        'group' => $context,
+                    ];
+                }
+
+                if ($params->get('show_j2store_reports')) {
+                    $this->buttons[$key][] = [
+                        'image' => 'far fa-chart-bar',
+                        'link' => Route::_('index.php?option=com_j2store&view=reports'),
+                        'name' => 'MOD_CUSTOM_QUICKICON_REPORTS',
+                        'group' => $context,
+                    ];
+                }
+
+                if ($params->get('show_j2store_config')) {
+                    $this->buttons[$key][] = [
+                        'image' => 'icon-wrench',
+                        'link' => Route::_('index.php?option=com_j2store&view=configuration'),
+                        'name' => 'MOD_CUSTOM_QUICKICON_CONFIGURATION',
+                        'group' => $context,
+                    ];
+                }
+            }
+
+            // PHOCACART QUICKICONS
+            if ($params->get('ecommerce_component') == "PhocaCart") {
+                if ($params->get('show_phocacart_dashboard')) {
+                    $this->buttons[$key][] = [
+                        'image' => 'icon-cart',
+                        'link' => Route::_('index.php?option=com_phocacart&view=phocacartcp'),
+                        'name' => 'MOD_CUSTOM_QUICKICON_PHOCACART',
+                        'group' => $context,
+                    ];
+                }
+
+                if ($params->get('show_phocacart_products')) {
+                    $this->buttons[$key][] = [
+                        'image' => 'icon-cubes',
+                        'link' => Route::_('index.php?option=com_phocacart&view=phocacartitems'),
+                        'linkadd' => Route::_('index.php?option=com_phocacart&task="phocacartitem.add"'),
+                        'name' => 'MOD_CUSTOM_QUICKICON_PRODUCTS',
+                        'group' => $context,
+                    ];
+                }
+
+                if ($params->get('show_phocacart_categories')) {
+                    $this->buttons[$key][] = [
+                        'image' => 'icon-folder',
+                        'link' => Route::_('index.php?option=com_phocacart&view=phocacartcategories'),
+                        'linkadd' => Route::_('index.php?option=com_phocacart&task=phocacartcategory.add'),
+                        'name' => 'MOD_CUSTOM_QUICKICON_CATEGORIES',
+                        'group' => $context,
+                    ];
+                }
+
+                if ($params->get('show_phocacart_customers')) {
+                    $this->buttons[$key][] = [
+                        'image' => 'icon-user',
+                        'link' => Route::_('index.php?option=com_phocacart&view=phocacartusers'),
+                        'linkadd' => Route::_('index.php?option=com_phocacart&task=phocacartuser.add'),
+                        'name' => 'MOD_CUSTOM_QUICKICON_USERS',
+                        'group' => $context,
+                    ];
+                }
+
+                if ($params->get('show_phocacart_orders')) {
+                    $this->buttons[$key][] = [
+                        'image' => 'icon-credit',
+                        'link' => Route::_('index.php?option=com_phocacart&view=phocacartorders'),
+                        'name' => 'MOD_CUSTOM_QUICKICON_ORDERS',
+                        'group' => $context,
+                    ];
+                }
+
+                if ($params->get('show_phocacart_wishlists')) {
+                    $this->buttons[$key][] = [
+                        'image' => 'fas fa-heart',
+                        'link' => Route::_('index.php?option=com_phocacart&view=phocacartwishlists'),
+                        'linkadd' => Route::_('index.php?option=com_phocacart&task=phocacartwishlist.add'),
+                        'name' => 'MOD_CUSTOM_QUICKICON_WISHLIST',
+                        'group' => $context,
+                    ];
+                }
+
+                if ($params->get('show_phocacart_rewardspoints')) {
+                    $this->buttons[$key][] = [
+                        'image' => 'fas fa-coins',
+                        'link' => Route::_('index.php?option=com_phocacart&view=phocacartrewards'),
+                        'linkadd' => Route::_('index.php?option=com_phocacart&task=phocacartreward.add'),
+                        'name' => 'MOD_CUSTOM_QUICKICON_REWARDS',
+                        'group' => $context,
+                    ];
+                }
+
+                if ($params->get('show_phocacart_questions')) {
+                    $this->buttons[$key][] = [
+                        'image' => 'fas fa-comments',
+                        'link' => Route::_('index.php?option=com_phocacart&view=phocacartquestions'),
+                        'linkadd' => Route::_('index.php?option=com_phocacart&task=phocacartquestion.add'),
+                        'name' => 'MOD_CUSTOM_QUICKICON_QUESTIONS',
+                        'group' => $context,
+                    ];
+                }
+
+                if ($params->get('show_phocacart_discounts')) {
+                    $this->buttons[$key][] = [
+                        'image' => 'icon-tag',
+                        'link' => Route::_('index.php?option=com_phocacart&view=phocacartdiscounts'),
+                        'linkadd' => Route::_('index.php?option=com_phocacart&task=phocacartdiscount.add'),
+                        'name' => 'MOD_CUSTOM_QUICKICON_DISCOUNTS',
+                        'group' => $context,
+                    ];
+                }
+
+                if ($params->get('show_phocacart_coupons')) {
+                    $this->buttons[$key][] = [
+                        'image' => 'icon-tags-2',
+                        'link' => Route::_('index.php?option=com_phocacart&view=phocacartcoupons'),
+                        'linkadd' => Route::_('index.php?option=com_phocacart&task=phocacartcoupon.add'),
+                        'name' => 'MOD_CUSTOM_QUICKICON_COUPONS',
+                        'group' => $context,
+                    ];
+                }
+
+                if ($params->get('show_phocacart_manufacturers')) {
+                    $this->buttons[$key][] = [
+                        'image' => 'fas fa-industry',
+                        'link' => Route::_('index.php?option=com_phocacart&view=phocacartmanufacturers'),
+                        'linkadd' => Route::_('index.php?option=com_phocacart&task=phocacartmanufacturer.add'),
+                        'name' => 'MOD_CUSTOM_QUICKICON_MANUFACTURERS',
+                        'group' => $context,
+                    ];
+                }
+
+                if ($params->get('show_phocacart_vendors')) {
+                    $this->buttons[$key][] = [
+                        'image' => 'fas fa-user-tag',
+                        'link' => Route::_('index.php?option=com_phocacart&view=phocacartvendors'),
+                        'linkadd' => Route::_('index.php?option=com_phocacart&task=phocacartvendor.add'),
+                        'name' => 'MOD_CUSTOM_QUICKICON_MANUFACTURERS',
+                        'group' => $context,
+                    ];
+                }
+
+                if ($params->get('show_phocacart_reviews')) {
+                    $this->buttons[$key][] = [
+                        'image' => 'icon-star',
+                        'link' => Route::_('index.php?option=com_phocacart&view=phocacartreviews'),
+                        'linkadd' => Route::_('index.php?option=com_phocacart&task=phocacartreview.add'),
+                        'name' => 'MOD_CUSTOM_QUICKICON_REVIEWS',
+                        'group' => $context,
+                    ];
+                }
+
+                if ($params->get('show_phocacart_reports')) {
+                    $this->buttons[$key][] = [
+                        'image' => 'far fa-chart-bar',
+                        'link' => Route::_('index.php?option=com_phocacart&view=phocacartreports'),
+                        'name' => 'MOD_CUSTOM_QUICKICON_REPORTS',
+                        'group' => $context,
+                    ];
+                }
+
+                if ($params->get('show_phocacart_openingtimes')) {
+                    $this->buttons[$key][] = [
+                        'image' => 'far fa-clock',
+                        'link' => Route::_('index.php?option=com_phocacart&view=phocacarttimes'),
+                        'linkadd' => Route::_('index.php?option=com_phocacart&task=phocacarttime.add'),
+                        'name' => 'MOD_CUSTOM_QUICKICON_OPENINGTIMES',
+                        'group' => $context,
+                    ];
+                }
+
+                if ($params->get('show_phocacart_config')) {
+                    $this->buttons[$key][] = [
+                        'image' => 'icon-wrench',
+                        'link' => Route::_('index.php?option=com_config&view=component&component=com_phocacart'),
+                        'name' => 'MOD_CUSTOM_QUICKICON_CONFIGURATION',
+                        'group' => $context,
+                    ];
+                }
+            }
 
             // VIRTUEMART QUICKICONS
             if ($params->get('ecommerce_component') == "Virtuemart") {
