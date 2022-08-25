@@ -390,8 +390,395 @@ class CustomQuickIconHelper
             }
 
 
+            // DJ-CATALOG QUICKICONS
+            if ($params->get('ecommerce_component') == "DJ-Catalog") {
+                if ($params->get('show_djcatalog_dashboard')) {
+                    $this->buttons[$key][] = [
+                        'image' => 'icon-cart',
+                        'link' => Route::_('index.php?option=com_djcatalog2&view=cpanel'),
+                        'name' => 'MOD_CUSTOM_QUICKICON_DJCATALOG',
+                        'group' => $context,
+                    ];
+                }
+
+                if ($params->get('show_djcatalog_products')) {
+                    $this->buttons[$key][] = [
+                        'image' => 'icon-cubes',
+                        'link' => Route::_('index.php?option=com_djcatalog2&view=items'),
+                        'linkadd' => Route::_('index.php?option=com_djcatalog2&task=item.add'),
+                        'name' => 'MOD_CUSTOM_QUICKICON_PRODUCTS',
+                        'group' => $context,
+                    ];
+                }
+
+                if ($params->get('show_djcatalog_categories')) {
+                    $this->buttons[$key][] = [
+                        'image' => 'icon-folder',
+                        'link' => Route::_('index.php?option=com_djcatalog2&view=categories'),
+                        'linkadd' => Route::_('index.php?option=com_djcatalog2&task=category.add'),
+                        'name' => 'MOD_CUSTOM_QUICKICON_CATEGORIES',
+                        'group' => $context,
+                    ];
+                }
+
+                if ($params->get('show_djcatalog_customers')) {
+                    $this->buttons[$key][] = [
+                        'image' => 'icon-user',
+                        'link' => Route::_('index.php?option=com_djcatalog2&view=customers'),
+                        'name' => 'MOD_CUSTOM_QUICKICON_USERS',
+                        'group' => $context,
+                    ];
+                }
+
+                if ($params->get('show_djcatalog_orders')) {
+                    $this->buttons[$key][] = [
+                        'image' => 'icon-credit',
+                        'link' => Route::_('index.php?option=com_djcatalog2&view=orders'),
+                        'linkadd' => Route::_('index.php?option=com_djcatalog2&task=order.add'),
+                        'name' => 'MOD_CUSTOM_QUICKICON_ORDERS',
+                        'group' => $context,
+                    ];
+                }
+
+                if ($params->get('show_djcatalog_subscriptions')) {
+                    $this->buttons[$key][] = [
+                        'image' => 'fas fa-file-invoice-dollar',
+                        'link' => Route::_('index.php?option=com_djcatalog2&view=subscriptions'),
+                        'linkadd' => Route::_('index.php?option=com_djcatalog2&task=subscription.add'),
+                        'name' => 'MOD_CUSTOM_QUICKICON_SUBSCRIPTIONS',
+                        'group' => $context,
+                    ];
+                }
+
+                if ($params->get('show_djcatalog_pricerules')) {
+                    $this->buttons[$key][] = [
+                        'image' => 'icon-tag',
+                        'link' => Route::_('index.php?option=com_djcatalog2&view=pricerules'),
+                        'linkadd' => Route::_('index.php?option=com_djcatalog2&task=pricerule.add'),
+                        'name' => 'MOD_CUSTOM_QUICKICON_PRICERULES',
+                        'group' => $context,
+                    ];
+                }
+
+                if ($params->get('show_djcatalog_coupons')) {
+                    $this->buttons[$key][] = [
+                        'image' => 'icon-tags-2',
+                        'link' => Route::_('index.php?option=com_djcatalog2&view=coupons'),
+                        'linkadd' => Route::_('index.php?option=com_djcatalog2&task=coupon.add'),
+                        'name' => 'MOD_CUSTOM_QUICKICON_COUPONS',
+                        'group' => $context,
+                    ];
+                }
+
+                if ($params->get('show_djcatalog_producers')) {
+                    $this->buttons[$key][] = [
+                        'image' => 'fas fa-industry',
+                        'link' => Route::_('index.php?option=com_djcatalog2&view=producers'),
+                        'linkadd' => Route::_('index.php?option=com_djcatalog2&task=producer.add'),
+                        'name' => 'MOD_CUSTOM_QUICKICON_PRODUCERS',
+                        'group' => $context,
+                    ];
+                }
+
+                if ($params->get('show_djcatalog_vendors')) {
+                    $this->buttons[$key][] = [
+                        'image' => 'fas fa-user-tag',
+                        'link' => Route::_('index.php?option=com_djcatalog2&view=vendors'),
+                        'linkadd' => Route::_('index.php?option=com_djcatalog2&task=vendor.add'),
+                        'name' => 'MOD_CUSTOM_QUICKICON_VENDORS',
+                        'group' => $context,
+                    ];
+                }
+
+                if ($params->get('show_djcatalog_reviews')) {
+                    $this->buttons[$key][] = [
+                        'image' => 'icon-star',
+                        'link' => Route::_('index.php?option=com_djcatalog2&view=reviews'),
+                        'linkadd' => Route::_('index.php?option=com_djcatalog2&task=review.add'),
+                        'name' => 'MOD_CUSTOM_QUICKICON_REVIEWS',
+                        'group' => $context,
+                    ];
+                }
+
+                if ($params->get('show_djcatalog_messages')) {
+                    $this->buttons[$key][] = [
+                        'image' => 'icon-envelope-opened',
+                        'link' => Route::_('index.php?option=com_djcatalog2&view=messages'),
+                        'name' => 'MOD_CUSTOM_QUICKICON_MESSAGES',
+                        'group' => $context,
+                    ];
+                }
+
+                if ($params->get('show_djcatalog_pricesstock')) {
+                    $this->buttons[$key][] = [
+                        'image' => 'fas fa-barcode',
+                        'link' => Route::_('index.php?option=com_djcatalog2&view=prices'),
+                        'name' => 'MOD_CUSTOM_QUICKICON_PRICESSTOCK',
+                        'group' => $context,
+                    ];
+                }
+
+                if ($params->get('show_djcatalog_config')) {
+                    $this->buttons[$key][] = [
+                        'image' => 'icon-wrench',
+                        'link' => Route::_('index.php?option=com_config&view=component&component=com_djcatalog2'),
+                        'name' => 'MOD_CUSTOM_QUICKICON_CONFIGURATION',
+                        'group' => $context,
+                    ];
+                }
+            }
+
+
+            // ESHOP QUICKICONS
+            if ($params->get('ecommerce_component') == "EShop") {
+                if ($params->get('show_eshop_dashboard')) {
+                    $this->buttons[$key][] = [
+                        'image' => 'icon-cart',
+                        'link' => Route::_('index.php?option=com_eshop&view=dashboard'),
+                        'name' => 'MOD_CUSTOM_QUICKICON_ESHOP',
+                        'group' => $context,
+                    ];
+                }
+
+                if ($params->get('show_eshop_products')) {
+                    $this->buttons[$key][] = [
+                        'image' => 'icon-cubes',
+                        'link' => Route::_('index.php?option=com_eshop&view=products'),
+                        'linkadd' => Route::_('index.php?option=com_eshop&task=product.add'),
+                        'name' => 'MOD_CUSTOM_QUICKICON_PRODUCTS',
+                        'group' => $context,
+                    ];
+                }
+
+                if ($params->get('show_eshop_downloads')) {
+                    $this->buttons[$key][] = [
+                        'image' => 'fas fa-download',
+                        'link' => Route::_('index.php?option=com_eshop&view=downloads'),
+                        'linkadd' => Route::_('index.php?option=com_eshop&task=download.add'),
+                        'name' => 'MOD_CUSTOM_QUICKICON_DOWNLOADS',
+                        'group' => $context,
+                    ];
+                }
+
+                if ($params->get('show_eshop_categories')) {
+                    $this->buttons[$key][] = [
+                        'image' => 'icon-folder',
+                        'link' => Route::_('index.php?option=com_eshop&view=categories'),
+                        'linkadd' => Route::_('index.php?option=com_eshop&task=category.add'),
+                        'name' => 'MOD_CUSTOM_QUICKICON_CATEGORIES',
+                        'group' => $context,
+                    ];
+                }
+
+                if ($params->get('show_eshop_customers')) {
+                    $this->buttons[$key][] = [
+                        'image' => 'icon-user',
+                        'link' => Route::_('index.php?option=com_eshop&view=customers'),
+                        'linkadd' => Route::_('index.php?option=com_eshop&task=customer.add'),
+                        'name' => 'MOD_CUSTOM_QUICKICON_USERS',
+                        'group' => $context,
+                    ];
+                }
+
+                if ($params->get('show_eshop_orders')) {
+                    $this->buttons[$key][] = [
+                        'image' => 'icon-credit',
+                        'link' => Route::_('index.php?option=com_eshop&view=orders'),
+                        'name' => 'MOD_CUSTOM_QUICKICON_ORDERS',
+                        'group' => $context,
+                    ];
+                }
+
+                if ($params->get('show_eshop_quotes')) {
+                    $this->buttons[$key][] = [
+                        'image' => 'fas fa-file-invoice',
+                        'link' => Route::_('index.php?option=com_eshop&view=quotes'),
+                        'name' => 'MOD_CUSTOM_QUICKICON_QUOTES',
+                        'group' => $context,
+                    ];
+                }
+
+                if ($params->get('show_eshop_discounts')) {
+                    $this->buttons[$key][] = [
+                        'image' => 'icon-tag',
+                        'link' => Route::_('index.php?option=com_eshop&view=discounts'),
+                        'linkadd' => Route::_('index.php?option=com_eshop&task=discount.add'),
+                        'name' => 'MOD_CUSTOM_QUICKICON_DISCOUNTS',
+                        'group' => $context,
+                    ];
+                }
+
+                if ($params->get('show_eshop_coupons')) {
+                    $this->buttons[$key][] = [
+                        'image' => 'icon-tags-2',
+                        'link' => Route::_('index.php?option=com_eshop&view=coupons'),
+                        'linkadd' => Route::_('index.php?option=com_eshop&task=coupon.add'),
+                        'name' => 'MOD_CUSTOM_QUICKICON_COUPONS',
+                        'group' => $context,
+                    ];
+                }
+
+                if ($params->get('show_eshop_vouchers')) {
+                    $this->buttons[$key][] = [
+                        'image' => 'fas fa-heart',
+                        'link' => Route::_('index.php?option=com_eshop&view=vouchers'),
+                        'linkadd' => Route::_('index.php?option=com_eshop&task=voucher.add'),
+                        'name' => 'MOD_CUSTOM_QUICKICON_VOUCHERS',
+                        'group' => $context,
+                    ];
+                }
+
+                if ($params->get('show_eshop_manufacturers')) {
+                    $this->buttons[$key][] = [
+                        'image' => 'fas fa-industry',
+                        'link' => Route::_('index.php?option=com_eshop&view=manufacturers'),
+                        'linkadd' => Route::_('index.php?option=com_eshop&task=manufacturer.add'),
+                        'name' => 'MOD_CUSTOM_QUICKICON_MANUFACTURERS',
+                        'group' => $context,
+                    ];
+                }
+
+
+                if ($params->get('show_eshop_reviews')) {
+                    $this->buttons[$key][] = [
+                        'image' => 'icon-star',
+                        'link' => Route::_('index.php?option=com_eshop&view=reviews'),
+                        'linkadd' => Route::_('index.php?option=com_eshop&task=review.add'),
+                        'name' => 'MOD_CUSTOM_QUICKICON_REVIEWS',
+                        'group' => $context,
+                    ];
+                }
+
+                if ($params->get('show_eshop_notify')) {
+                    $this->buttons[$key][] = [
+                        'image' => 'icon-envelope-opened',
+                        'link' => Route::_('index.php?option=com_eshop&view=notify'),
+                        'name' => 'MOD_CUSTOM_QUICKICON_MESSAGES',
+                        'group' => $context,
+                    ];
+                }
+
+                if ($params->get('show_eshop_config')) {
+                    $this->buttons[$key][] = [
+                        'image' => 'icon-wrench',
+                        'link' => Route::_('index.php?option=com_eshop&view=configuration'),
+                        'name' => 'MOD_CUSTOM_QUICKICON_CONFIGURATION',
+                        'group' => $context,
+                    ];
+                }
+            }
+
+
+            // J2STORE QUICKICONS
+            if ($params->get('ecommerce_component') == "J2Store") {
+                if ($params->get('show_j2store_dashboard')) {
+                    $this->buttons[$key][] = [
+                        'image' => 'icon-cart',
+                        'link' => Route::_('index.php?option=com_j2store'),
+                        'name' => 'MOD_CUSTOM_QUICKICON_J2STORE',
+                        'group' => $context,
+                    ];
+                }
+
+                if ($params->get('show_j2store_products')) {
+                    $this->buttons[$key][] = [
+                        'image' => 'icon-cubes',
+                        'link' => Route::_('index.php?option=com_j2store&view=products'),
+                        'linkadd' => Route::_('index.php?option=com_content&view=article&layout=edit'),
+                        'name' => 'MOD_CUSTOM_QUICKICON_PRODUCTS',
+                        'group' => $context,
+                    ];
+                }
+
+                if ($params->get('show_j2store_inventory')) {
+                    $this->buttons[$key][] = [
+                        'image' => 'fas fa-barcode',
+                        'link' => Route::_('index.php?option=com_j2store&view=inventories'),
+                        'name' => 'MOD_CUSTOM_QUICKICON_INVENTORY',
+                        'group' => $context,
+                    ];
+                }
+
+                if ($params->get('show_j2store_vendors')) {
+                    $this->buttons[$key][] = [
+                        'image' => 'fas fa-user-tag',
+                        'link' => Route::_('index.php?option=com_j2store&view=vendors'),
+                        'linkadd' => Route::_('index.php?option=com_j2store&view=vendors&task=add'),
+                        'name' => 'MOD_CUSTOM_QUICKICON_VENDORS',
+                        'group' => $context,
+                    ];
+                }
+
+                if ($params->get('show_j2store_manufacturers')) {
+                    $this->buttons[$key][] = [
+                        'image' => 'fas fa-industry',
+                        'link' => Route::_('index.php?option=com_j2store&view=manufacturers'),
+                        'linkadd' => Route::_('index.php?option=com_j2store&view=manufacturers&task=add'),
+                        'name' => 'MOD_CUSTOM_QUICKICON_MANUFACTURERS',
+                        'group' => $context,
+                    ];
+                }
+
+                if ($params->get('show_j2store_orders')) {
+                    $this->buttons[$key][] = [
+                        'image' => 'icon-credit',
+                        'link' => Route::_('index.php?option=com_j2store&view=orders'),
+                        'name' => 'MOD_CUSTOM_QUICKICON_ORDERS',
+                        'group' => $context,
+                    ];
+                }
+
+                if ($params->get('show_j2store_customers')) {
+                    $this->buttons[$key][] = [
+                        'image' => 'icon-user',
+                        'link' => Route::_('index.php?option=com_j2store&view=customers'),
+                        'name' => 'MOD_CUSTOM_QUICKICON_USERS',
+                        'group' => $context,
+                    ];
+                }
+
+                if ($params->get('show_j2store_coupons')) {
+                    $this->buttons[$key][] = [
+                        'image' => 'icon-tags-2',
+                        'link' => Route::_('index.php?option=com_j2store&view=coupons'),
+                        'linkadd' => Route::_('index.php?option=com_j2store&view=coupons&task=add'),
+                        'name' => 'MOD_CUSTOM_QUICKICON_COUPONS',
+                        'group' => $context,
+                    ];
+                }
+
+                if ($params->get('show_j2store_vouchers')) {
+                    $this->buttons[$key][] = [
+                        'image' => 'icon-tag',
+                        'link' => Route::_('index.php?option=com_j2store&view=vouchers'),
+                        'linkadd' => Route::_('index.php?option=com_j2store&view=vouchers&task=add'),
+                        'name' => 'MOD_CUSTOM_QUICKICON_VOUCHERS',
+                        'group' => $context,
+                    ];
+                }
+
+                if ($params->get('show_j2store_reports')) {
+                    $this->buttons[$key][] = [
+                        'image' => 'far fa-chart-bar',
+                        'link' => Route::_('index.php?option=com_j2store&view=reports'),
+                        'name' => 'MOD_CUSTOM_QUICKICON_REPORTS',
+                        'group' => $context,
+                    ];
+                }
+
+                if ($params->get('show_j2store_config')) {
+                    $this->buttons[$key][] = [
+                        'image' => 'icon-wrench',
+                        'link' => Route::_('index.php?option=com_j2store&view=configuration'),
+                        'name' => 'MOD_CUSTOM_QUICKICON_CONFIGURATION',
+                        'group' => $context,
+                    ];
+                }
+            }
+
+
             // HIKASHOP QUICKICONS
-            if ($params->get('ecommerce_component') == "HikaShop") {
+            if ((empty($params->get('ecommerce_component'))) || ($params->get('ecommerce_component') == "HikaShop")) {
                 if ($params->get('show_hikashop_dashboard')) {
                     $this->buttons[$key][] = [
                         'image' => 'icon-cart',
@@ -607,251 +994,6 @@ class CustomQuickIconHelper
                 }
             }
 
-            // DJ-CATALOG QUICKICONS
-            if ($params->get('ecommerce_component') == "DJ-Catalog") {
-                if ($params->get('show_djcatalog_dashboard')) {
-                    $this->buttons[$key][] = [
-                        'image' => 'icon-cart',
-                        'link' => Route::_('index.php?option=com_djcatalog2&view=cpanel'),
-                        'name' => 'MOD_CUSTOM_QUICKICON_DJCATALOG',
-                        'group' => $context,
-                    ];
-                }
-
-                if ($params->get('show_djcatalog_products')) {
-                    $this->buttons[$key][] = [
-                        'image' => 'icon-cubes',
-                        'link' => Route::_('index.php?option=com_djcatalog2&view=items'),
-                        'linkadd' => Route::_('index.php?option=com_djcatalog2&task=item.add'),
-                        'name' => 'MOD_CUSTOM_QUICKICON_PRODUCTS',
-                        'group' => $context,
-                    ];
-                }
-
-                if ($params->get('show_djcatalog_categories')) {
-                    $this->buttons[$key][] = [
-                        'image' => 'icon-folder',
-                        'link' => Route::_('index.php?option=com_djcatalog2&view=categories'),
-                        'linkadd' => Route::_('index.php?option=com_djcatalog2&task=category.add'),
-                        'name' => 'MOD_CUSTOM_QUICKICON_CATEGORIES',
-                        'group' => $context,
-                    ];
-                }
-
-                if ($params->get('show_djcatalog_customers')) {
-                    $this->buttons[$key][] = [
-                        'image' => 'icon-user',
-                        'link' => Route::_('index.php?option=com_djcatalog2&view=customers'),
-                        'name' => 'MOD_CUSTOM_QUICKICON_USERS',
-                        'group' => $context,
-                    ];
-                }
-
-                if ($params->get('show_djcatalog_orders')) {
-                    $this->buttons[$key][] = [
-                        'image' => 'icon-credit',
-                        'link' => Route::_('index.php?option=com_djcatalog2&view=orders'),
-                        'linkadd' => Route::_('index.php?option=com_djcatalog2&task=order.add'),
-                        'name' => 'MOD_CUSTOM_QUICKICON_ORDERS',
-                        'group' => $context,
-                    ];
-                }
-
-                if ($params->get('show_djcatalog_subscriptions')) {
-                    $this->buttons[$key][] = [
-                        'image' => 'fas fa-file-invoice-dollar',
-                        'link' => Route::_('index.php?option=com_djcatalog2&view=subscriptions'),
-                        'linkadd' => Route::_('index.php?option=com_djcatalog2&task=subscription.add'),
-                        'name' => 'MOD_CUSTOM_QUICKICON_SUBSCRIPTIONS',
-                        'group' => $context,
-                    ];
-                }
-
-                if ($params->get('show_djcatalog_pricerules')) {
-                    $this->buttons[$key][] = [
-                        'image' => 'icon-tag',
-                        'link' => Route::_('index.php?option=com_djcatalog2&view=pricerules'),
-                        'linkadd' => Route::_('index.php?option=com_djcatalog2&task=pricerule.add'),
-                        'name' => 'MOD_CUSTOM_QUICKICON_PRICERULES',
-                        'group' => $context,
-                    ];
-                }
-
-                if ($params->get('show_djcatalog_coupons')) {
-                    $this->buttons[$key][] = [
-                        'image' => 'icon-tags-2',
-                        'link' => Route::_('index.php?option=com_djcatalog2&view=coupons'),
-                        'linkadd' => Route::_('index.php?option=com_djcatalog2&task=coupon.add'),
-                        'name' => 'MOD_CUSTOM_QUICKICON_COUPONS',
-                        'group' => $context,
-                    ];
-                }
-
-                if ($params->get('show_djcatalog_producers')) {
-                    $this->buttons[$key][] = [
-                        'image' => 'fas fa-industry',
-                        'link' => Route::_('index.php?option=com_djcatalog2&view=producers'),
-                        'linkadd' => Route::_('index.php?option=com_djcatalog2&task=producer.add'),
-                        'name' => 'MOD_CUSTOM_QUICKICON_PRODUCERS',
-                        'group' => $context,
-                    ];
-                }
-
-                if ($params->get('show_djcatalog_vendors')) {
-                    $this->buttons[$key][] = [
-                        'image' => 'fas fa-user-tag',
-                        'link' => Route::_('index.php?option=com_djcatalog2&view=vendors'),
-                        'linkadd' => Route::_('index.php?option=com_djcatalog2&task=vendor.add'),
-                        'name' => 'MOD_CUSTOM_QUICKICON_VENDORS',
-                        'group' => $context,
-                    ];
-                }
-
-                if ($params->get('show_djcatalog_reviews')) {
-                    $this->buttons[$key][] = [
-                        'image' => 'icon-star',
-                        'link' => Route::_('index.php?option=com_djcatalog2&view=reviews'),
-                        'linkadd' => Route::_('index.php?option=com_djcatalog2&task=review.add'),
-                        'name' => 'MOD_CUSTOM_QUICKICON_REVIEWS',
-                        'group' => $context,
-                    ];
-                }
-
-                if ($params->get('show_djcatalog_messages')) {
-                    $this->buttons[$key][] = [
-                        'image' => 'icon-envelope-opened',
-                        'link' => Route::_('index.php?option=com_djcatalog2&view=messages'),
-                        'name' => 'MOD_CUSTOM_QUICKICON_MESSAGES',
-                        'group' => $context,
-                    ];
-                }
-
-                if ($params->get('show_djcatalog_pricesstock')) {
-                    $this->buttons[$key][] = [
-                        'image' => 'fas fa-barcode',
-                        'link' => Route::_('index.php?option=com_djcatalog2&view=prices'),
-                        'name' => 'MOD_CUSTOM_QUICKICON_PRICESSTOCK',
-                        'group' => $context,
-                    ];
-                }
-
-                if ($params->get('show_djcatalog_config')) {
-                    $this->buttons[$key][] = [
-                        'image' => 'icon-wrench',
-                        'link' => Route::_('index.php?option=com_config&view=component&component=com_djcatalog2'),
-                        'name' => 'MOD_CUSTOM_QUICKICON_CONFIGURATION',
-                        'group' => $context,
-                    ];
-                }
-            }
-
-
-            // J2STORE QUICKICONS
-            if ($params->get('ecommerce_component') == "J2Store") {
-                if ($params->get('show_j2store_dashboard')) {
-                    $this->buttons[$key][] = [
-                        'image' => 'icon-cart',
-                        'link' => Route::_('index.php?option=com_j2store'),
-                        'name' => 'MOD_CUSTOM_QUICKICON_J2STORE',
-                        'group' => $context,
-                    ];
-                }
-
-                if ($params->get('show_j2store_products')) {
-                    $this->buttons[$key][] = [
-                        'image' => 'icon-cubes',
-                        'link' => Route::_('index.php?option=com_j2store&view=products'),
-                        'linkadd' => Route::_('index.php?option=com_content&view=article&layout=edit'),
-                        'name' => 'MOD_CUSTOM_QUICKICON_PRODUCTS',
-                        'group' => $context,
-                    ];
-                }
-
-                if ($params->get('show_j2store_inventory')) {
-                    $this->buttons[$key][] = [
-                        'image' => 'fas fa-barcode',
-                        'link' => Route::_('index.php?option=com_j2store&view=inventories'),
-                        'name' => 'MOD_CUSTOM_QUICKICON_INVENTORY',
-                        'group' => $context,
-                    ];
-                }
-
-                if ($params->get('show_j2store_vendors')) {
-                    $this->buttons[$key][] = [
-                        'image' => 'fas fa-user-tag',
-                        'link' => Route::_('index.php?option=com_j2store&view=vendors'),
-                        'linkadd' => Route::_('index.php?option=com_j2store&view=vendors&task=add'),
-                        'name' => 'MOD_CUSTOM_QUICKICON_VENDORS',
-                        'group' => $context,
-                    ];
-                }
-
-                if ($params->get('show_j2store_manufacturers')) {
-                    $this->buttons[$key][] = [
-                        'image' => 'fas fa-industry',
-                        'link' => Route::_('index.php?option=com_j2store&view=manufacturers'),
-                        'linkadd' => Route::_('index.php?option=com_j2store&view=manufacturers&task=add'),
-                        'name' => 'MOD_CUSTOM_QUICKICON_MANUFACTURERS',
-                        'group' => $context,
-                    ];
-                }
-
-                if ($params->get('show_j2store_orders')) {
-                    $this->buttons[$key][] = [
-                        'image' => 'icon-credit',
-                        'link' => Route::_('index.php?option=com_j2store&view=orders'),
-                        'name' => 'MOD_CUSTOM_QUICKICON_ORDERS',
-                        'group' => $context,
-                    ];
-                }
-
-                if ($params->get('show_j2store_customers')) {
-                    $this->buttons[$key][] = [
-                        'image' => 'icon-user',
-                        'link' => Route::_('index.php?option=com_j2store&view=customers'),
-                        'name' => 'MOD_CUSTOM_QUICKICON_USERS',
-                        'group' => $context,
-                    ];
-                }
-
-                if ($params->get('show_j2store_coupons')) {
-                    $this->buttons[$key][] = [
-                        'image' => 'icon-tags-2',
-                        'link' => Route::_('index.php?option=com_j2store&view=coupons'),
-                        'linkadd' => Route::_('index.php?option=com_j2store&view=coupons&task=add'),
-                        'name' => 'MOD_CUSTOM_QUICKICON_COUPONS',
-                        'group' => $context,
-                    ];
-                }
-
-                if ($params->get('show_j2store_vouchers')) {
-                    $this->buttons[$key][] = [
-                        'image' => 'icon-tag',
-                        'link' => Route::_('index.php?option=com_j2store&view=vouchers'),
-                        'linkadd' => Route::_('index.php?option=com_j2store&view=vouchers&task=add'),
-                        'name' => 'MOD_CUSTOM_QUICKICON_VOUCHERS',
-                        'group' => $context,
-                    ];
-                }
-
-                if ($params->get('show_j2store_reports')) {
-                    $this->buttons[$key][] = [
-                        'image' => 'far fa-chart-bar',
-                        'link' => Route::_('index.php?option=com_j2store&view=reports'),
-                        'name' => 'MOD_CUSTOM_QUICKICON_REPORTS',
-                        'group' => $context,
-                    ];
-                }
-
-                if ($params->get('show_j2store_config')) {
-                    $this->buttons[$key][] = [
-                        'image' => 'icon-wrench',
-                        'link' => Route::_('index.php?option=com_j2store&view=configuration'),
-                        'name' => 'MOD_CUSTOM_QUICKICON_CONFIGURATION',
-                        'group' => $context,
-                    ];
-                }
-            }
 
             // CUSTOM QUICKICONS
             $items = $params->get('custom_items', []);
