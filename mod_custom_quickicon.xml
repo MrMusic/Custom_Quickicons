@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <extension type="module" client="administrator" method="upgrade">
-    <name>Custom Quick Icons</name>
+    <name>MOD_CUSTOM_QUICKICON</name>
     <author>Joomill Extensions</author>
     <creationDate>August 2022</creationDate>
     <copyright>Copyright (C) 2022 Joomill. All rights reserved.</copyright>
     <license>GNU General Public License version 2 or later;</license>
     <authorEmail>info@joomill-extensions.com</authorEmail>
     <authorUrl>https://www.joomill-extensions.com</authorUrl>
-    <version>1.5.0</version>
+    <version>1.5.1</version>
     <description>MOD_CUSTOM_QUICKICON_XML_DESCRIPTION</description>
     <namespace path="src">Joomill\Module\Customquickicon</namespace>
     <files>

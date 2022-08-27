@@ -1010,7 +1010,7 @@ class CustomQuickIconHelper
                         'image' => 'fas fa-user-tag',
                         'link' => Route::_('index.php?option=com_phocacart&view=phocacartvendors'),
                         'linkadd' => Route::_('index.php?option=com_phocacart&task=phocacartvendor.add'),
-                        'name' => 'MOD_CUSTOM_QUICKICON_MANUFACTURERS',
+                        'name' => 'MOD_CUSTOM_QUICKICON_VENDORS',
                         'group' => $context,
                     ];
                 }
