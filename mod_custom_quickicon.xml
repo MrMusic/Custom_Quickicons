@@ -26,10 +26,6 @@
         <fields name="params">
             <fieldset name="basic">
                 <field
-                        name="ModalHelper"
-                        type="modalhelper"
-                />
-                <field
                     name="show_robots"
                     type="list"
                     label="MOD_CUSTOM_QUICKICON_SHOW_ROBOTS_LABEL"
