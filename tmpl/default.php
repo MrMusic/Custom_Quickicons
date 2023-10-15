@@ -1,20 +1,22 @@
 <?php
 /*
- *  package: Custom Quickicons
- *  copyright: Copyright (c) 2022. Jeroen Moolenschot | Joomill
+ *  package: Custom-Quickicons
+ *  copyright: Copyright (c) 2023. Jeroen Moolenschot | Joomill
  *  license: GNU General Public License version 2 or later
  *  link: https://www.joomill-extensions.com
  */
 
+use Joomla\CMS\HTML\HTMLHelper;
+use Joomla\CMS\Language\Text;
+use Joomill\Module\Customquickicon\Administrator\Helper\CustomquickiconHelper;
+
 // No direct access.
 defined('_JEXEC') or die;
 
-use Joomla\CMS\HTML\HTMLHelper;
-use Joomla\CMS\Language\Text;
-
 /** @var Joomla\CMS\WebAsset\WebAssetManager $wa */
 $wa = $app->getDocument()->getWebAssetManager();
-$wa->useScript('core');
+$wa->useScript('core')
+	->useScript('bootstrap.dropdown');
 $wa->registerAndUseScript('mod_quickicon', 'mod_quickicon/quickicon.min.js', ['relative' => true, 'version' => 'auto'], ['type' => 'module']);
 $wa->registerAndUseScript('mod_quickicon-es5', 'mod_quickicon/quickicon-es5.min.js', ['relative' => true, 'version' => 'auto'], ['nomodule' => true, 'defer' => true]);
 
