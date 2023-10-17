@@ -10,9 +10,9 @@
         />
         <field
             name="item_icon"
-            type="text"
+            type="IconSelector"
             label="MOD_CUSTOM_QUICKICON_ITEM_ICON_LABEL"
-            description="MOD_CUSTOM_QUICKICON_ITEM_ICON_DESC"
+            description=""
         />
         <field
             name="item_link_menuitem"

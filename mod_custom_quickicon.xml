@@ -7,11 +7,12 @@
     <license>GNU General Public License version 2 or later;</license>
     <authorEmail>info@joomill-extensions.com</authorEmail>
     <authorUrl>https://www.joomill-extensions.com</authorUrl>
-    <version>1.6.0</version>
+    <version>2.0.0</version>
     <description>MOD_CUSTOM_QUICKICON_XML_DESCRIPTION</description>
     <namespace path="src">Joomill\Module\Customquickicon</namespace>
     <files>
         <filename module="mod_custom_quickicon">mod_custom_quickicon.php</filename>
+        <filename>script.php</filename>
         <folder>forms</folder>
         <folder>language</folder>
         <folder>services</folder>
@@ -25,6 +26,10 @@
     <config>
         <fields name="params">
             <fieldset name="basic">
+                <field
+                        name="ModalHelper"
+                        type="ModalHelper"
+                />
                 <field
                     name="show_robots"
                     type="list"
@@ -1243,6 +1248,9 @@
             </fieldset>
         </fields>
     </config>
+
+    <!-- Scripts to run on installation -->
+    <scriptfile>script.php</scriptfile>
 
     <changelogurl><![CDATA[https://www.joomill-extensions.com/index.php?option=com_ochsubscriptions&amp;view=changelog&amp;format=xml&amp;cat=13]]></changelogurl>
 
