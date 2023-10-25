@@ -211,10 +211,10 @@ class CustomQuickIconHelper
 
                 $quickicon = [
                     'image'   => $item->item_icon,
-                    'link'    => Route::_("index.php?option=com_content"),
-                    'linkadd' => Route::_("index.php?option=com_content&view=article&layout=edit"),
+                    'link'    => Route::_("index.php?option=com_content&view=articles"),
+                    'linkadd' => Route::_('index.php?option=com_content&task=article.add'),
                     'name'    => $title,
-                    'access'  => ['core.manage', 'com_content'],
+                    'access'  => ['core.manage', 'com_content', 'core.create', 'com_content'],
                     'group'   => $context,
                 ];
 
