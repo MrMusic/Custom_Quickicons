@@ -92,7 +92,7 @@ class IconSelectorField extends FormField {
                     <small class="form-text">'.Text::_('MOD_CUSTOM_QUICKICON_NUMBER_OF_ICONS').': '.count(self::$icons).'</small>
                 </div>     
                 <div class="col text-end">
-                    <small class="form-text">FontAwesome Version: 6.4.2</small>
+                    <small class="form-text">FontAwesome Version: 6.5.1</small>
                 </div>     
             </div>
         </form>';
