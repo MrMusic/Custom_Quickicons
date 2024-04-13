@@ -71,7 +71,7 @@ class CustomQuickIconHelper
                         'image' => 'icon-publish',
                         'link'  => 'index.php?option=com_config',
                         'text'  => 'Robots meta tag: <br/> Index, Follow',
-                        'class' => 'success',
+                        'class' => 'quickicon-robots success',
                         'group' => $context,
                         ];
                     $this->buttons[$key][] = $quickicon;
@@ -82,7 +82,7 @@ class CustomQuickIconHelper
                         'image' => 'icon-warning-2',
                         'link'  => 'index.php?option=com_config',
                         'text'  => 'Robots meta tag: <br/>' . $robotsstatus,
-                        'class' => 'danger',
+                        'class' => 'quickicon-robots danger',
                         'group' => $context,
                         ];
                     $this->buttons[$key][] = $quickicon;
@@ -104,6 +104,7 @@ class CustomQuickIconHelper
                     'linkadd' => Route::_('index.php?option=com_users&task=user.add'),
                     'name'    => 'MOD_CUSTOM_QUICKICON_USER_MANAGER',
                     'access'  => ['core.manage', 'com_users', 'core.create', 'com_users'],
+                    'class'   => 'quickicon-users',
                     'group'   => $context,
                 ];
 
@@ -121,6 +122,7 @@ class CustomQuickIconHelper
                     'linkadd' => Route::_('index.php?option=com_menus&task=item.add'),
                     'name'    => 'MOD_CUSTOM_QUICKICON_MENUITEMS_MANAGER',
                     'access'  => ['core.manage', 'com_menus', 'core.create', 'com_menus'],
+                    'class'   => 'quickicon-menus',
                     'group'   => $context,
                 ];
 
@@ -138,6 +140,7 @@ class CustomQuickIconHelper
                     'linkadd' => Route::_('index.php?option=com_content&task=article.add'),
                     'name'    => 'MOD_CUSTOM_QUICKICON_ARTICLE_MANAGER',
                     'access'  => ['core.manage', 'com_content', 'core.create', 'com_content'],
+                    'class'   => 'quickicon-articles',
                     'group'   => $context,
                 ];
 
@@ -155,6 +158,7 @@ class CustomQuickIconHelper
                     'linkadd' => Route::_('index.php?option=com_tags&task=tag.edit'),
                     'name'    => 'MOD_CUSTOM_QUICKICON_TAGS_MANAGER',
                     'access'  => ['core.manage', 'com_tags', 'core.create', 'com_tags'],
+                    'class'   => 'quickicon-tags',
                     'group'   => $context,
                 ];
 
@@ -171,18 +175,25 @@ class CustomQuickIconHelper
 
             foreach ($items as $item) {
                 $db = Factory::getDbo();
-                $db->setQuery('SELECT title FROM #__content WHERE id=' . $item->item_id);
+                $query = $db->getQuery(true)
+                    ->select($db->quoteName('title'))
+                    ->from($db->quoteName('#__content'))
+                    ->where($db->quoteName('id') . ' = ' . (int) $item->item_id);
+
+                $db->setQuery($query);
                 $title = $db->loadResult();
 
                 $quickicon = [
-                    'image' => $item->item_icon,
-                    'link'  => Route::_("index.php?option=com_content&view=article&task=article.edit&id=$item->item_id"),
-                    'name'  => $title,
-                    'access'  => ['core.manage', 'com_content'],
-                    'group' => $context,
+                    'image'     => $item->item_icon,
+                    'link'      => Route::_("index.php?option=com_content&view=article&task=article.edit&id=$item->item_id"),
+                    'name'      => $title,
+                    'access'    => ['core.manage', 'com_content'],
+                    'class'     => 'quickicon-article quickicon-article-'. $item->item_id,
+                    'group'     => $context,
                 ];
                 if ($item->item_return) {
-                    $quickicon['link'] .= '&return=' . urlencode(base64_encode($item->item_return));
+                    $returnParam = '&return=' . urlencode(base64_encode($item->item_return));
+                    $quickicon['link'] .= $returnParam;
                 }
 
                 $this->buttons[$key][] = $quickicon;
@@ -195,7 +206,12 @@ class CustomQuickIconHelper
             foreach ($items as $item) {
                 if ($item->article_category != "") {
                     $db = Factory::getDbo();
-                    $db->setQuery('SELECT title FROM #__categories WHERE id=' . $item->article_category);
+                    $query = $db->getQuery(true)
+                        ->select($db->quoteName('title'))
+                        ->from($db->quoteName('#__categories'))
+                        ->where($db->quoteName('id') . ' = ' . (int) $item->article_category);
+
+                    $db->setQuery($query);
                     $title = $db->loadResult();
                 } else {
                     $title = 'MOD_CUSTOM_QUICKICON_FORM_ARTICLES_LABEL';
@@ -215,29 +231,35 @@ class CustomQuickIconHelper
                     'linkadd' => Route::_('index.php?option=com_content&task=article.add'),
                     'name'    => $title,
                     'access'  => ['core.manage', 'com_content', 'core.create', 'com_content'],
+                    'class'   => 'quickicon-category quickicon-category-' . str_replace(' ', '-',$item->item_name),
                     'group'   => $context,
                 ];
 
                 if ($item->article_category) {
                     $quickicon['link'] .= '&filter[category_id]=' . $item->article_category;
                     $quickicon['linkadd'] .= '&catid=' . $item->article_category;
+                    $quickicon['class'] .= ' quickicon-category-' . $item->article_category;
                 }
                 if ($item->article_language != "*") {
                     $quickicon['link'] .= '&filter[language]=' . $item->article_language;
                     $quickicon['linkadd'] .= '&language=' . $item->article_language;
+                    $quickicon['class'] .= ' quickicon-category-' . strtolower($item->article_language);
                 }
                 if ($item->article_author) {
                     if ($item->article_author == "current") {
                         $item->article_author = Factory::getUser()->id;
                     }
                     $quickicon['link'] .= '&filter[author_id]=' . $item->article_author;
+                    $quickicon['class'] .= ' quickicon-category-author-' . $item->article_author;
                 }
                 if (isset($item->article_search) && $item->article_search != "") {
                     $quickicon['link'] .= '&filter[search]=' . $item->article_search;
+                    $quickicon['class'] .= ' quickicon-category-' . $item->article_search;
                 }
                 if (isset($item->article_tag) && $item->article_tag != "") {
                     foreach ($item->article_tag as $tag){
                         $quickicon['link'] .= '&filter[tag][]=' . $tag;
+                        $quickicon['class'] .= ' quickicon-category-' . $tag;
                     }
                 } 
                 
@@ -252,6 +274,7 @@ class CustomQuickIconHelper
                     'linkadd' => Route::_('index.php?option=com_categories&task=category.add'),
                     'name'    => 'MOD_CUSTOM_QUICKICON_CATEGORY_MANAGER',
                     'access'  => ['core.manage', 'com_content', 'core.create', 'com_content'],
+                    'class'   => 'quickicon-categories',
                     'group'   => $context,
                 ];
 
@@ -268,6 +291,7 @@ class CustomQuickIconHelper
                     'link'   => Route::_('index.php?option=com_media'),
                     'name'   => 'MOD_CUSTOM_QUICKICON_MEDIA_MANAGER',
                     'access' => ['core.manage', 'com_media'],
+                    'class'  => 'quickicon-media',
                     'group'  => $context,
                 ];
             }
@@ -279,6 +303,7 @@ class CustomQuickIconHelper
                     'linkadd' => Route::_('index.php?option=com_modules&view=select&client_id=0'),
                     'name'    => 'MOD_CUSTOM_QUICKICON_MODULE_MANAGER',
                     'access'  => ['core.manage', 'com_modules'],
+                    'class'   => 'quickicon-modules',
                     'group'   => $context
                 ];
 
@@ -294,13 +319,19 @@ class CustomQuickIconHelper
 
             foreach ($items as $item) {
                 $db = Factory::getDbo();
-                $db->setQuery('SELECT title FROM #__modules WHERE id=' . $item->item_id);
+                $query = $db->getQuery(true)
+                    ->select($db->quoteName('title'))
+                    ->from($db->quoteName('#__modules'))
+                    ->where($db->quoteName('id') . ' = ' . (int) $item->item_id);
+
+                $db->setQuery($query);
                 $title = $db->loadResult();
 
                 $quickicon = [
                     'image' => $item->item_icon,
                     'link'  => Route::_("index.php?option=com_modules&view=module&task=module.edit&id=$item->item_id"),
                     'name'  => $title,
+                    'class' => 'quickicon-module quickicon-module-'.$item->item_id,
                     'group' => $context,
                 ];
                 if ($item->item_return) {
@@ -316,6 +347,7 @@ class CustomQuickIconHelper
                     'link'   => Route::_('index.php?option=com_plugins'),
                     'name'   => 'MOD_CUSTOM_QUICKICON_PLUGIN_MANAGER',
                     'access' => ['core.manage', 'com_plugins'],
+                    'class'  => 'quickicon-plugins',
                     'group'  => $context
                 ];
 
@@ -333,6 +365,7 @@ class CustomQuickIconHelper
                     'linkadd' => Route::_('index.php?option=com_installer&view=install'),
                     'name'    => 'MOD_CUSTOM_QUICKICON_EXTENSIONS_MANAGER',
                     'access'  => ['core.manage', 'com_installer', 'core.admin', 'com_installer'],
+                    'class'   => 'quickicon-extensions',
                     'group'   => $context
                 ];
             }
@@ -343,6 +376,7 @@ class CustomQuickIconHelper
                     'link'   => Route::_('index.php?option=com_templates&view=styles&client_id=0'),
                     'name'   => 'MOD_CUSTOM_QUICKICON_TEMPLATE_STYLES',
                     'access' => ['core.admin', 'com_templates'],
+                    'class'  => 'quickicon-template-styles',
                     'group'  => $context
                 ];
             }
@@ -353,6 +387,7 @@ class CustomQuickIconHelper
                     'link'   => Route::_('index.php?option=com_templates&view=templates&client_id=0'),
                     'name'   => 'MOD_CUSTOM_QUICKICON_TEMPLATE_CODE',
                     'access' => ['core.admin', 'com_templates'],
+                    'class'  => 'quickicon-template-code',
                     'group'  => $context
                 ];
             }
@@ -363,6 +398,7 @@ class CustomQuickIconHelper
                     'link'   => Route::_('index.php?option=com_checkin'),
                     'name'   => 'MOD_CUSTOM_QUICKICON_CHECKINS',
                     'access' => ['core.admin', 'com_checkin'],
+                    'class'  => 'quickicon-checkin',
                     'group'  => $context
                 ];
 
@@ -379,6 +415,7 @@ class CustomQuickIconHelper
                     'link'   => Route::_('index.php?option=com_cache'),
                     'name'   => 'MOD_CUSTOM_QUICKICON_CACHE',
                     'access' => ['core.admin', 'com_cache'],
+                    'class'  => 'quickicon-cache',
                     'group'  => $context
                 ];
 
@@ -395,6 +432,7 @@ class CustomQuickIconHelper
                     'link'   => Route::_('index.php?option=com_config'),
                     'name'   => 'MOD_CUSTOM_QUICKICON_GLOBAL_CONFIGURATION',
                     'access' => ['core.manage', 'com_config', 'core.admin', 'com_config'],
+                    'class'  => 'quickicon-config',
                     'group'  => $context,
                 ];
             }
@@ -405,6 +443,7 @@ class CustomQuickIconHelper
 			        'link'   => Route::_('index.php?option=com_content&view=featured'),
 			        'name'   => 'MOD_CUSTOM_QUICKICON_FEATURED_MANAGER',
 			        'access' => ['core.manage', 'com_content'],
+                    'class'  => 'quickicon-featured',
 			        'group'  => 'MOD_CUSTOM_QUICKICON_SITE',
 		        ];
 
@@ -422,6 +461,7 @@ class CustomQuickIconHelper
 			        'linkadd' => Route::_('index.php?option=com_workflow&view=workflow&layout=edit&extension=com_content.article'),
 			        'name'    => 'MOD_CUSTOM_QUICKICON_WORKFLOW_MANAGER',
 			        'access'  => ['core.manage', 'com_workflow', 'core.create', 'com_workflow'],
+                    'class'   => 'quickicon-workflows',
 			        'group'   => 'MOD_CUSTOM_QUICKICON_SITE',
 		        ];
 	        }
@@ -433,6 +473,7 @@ class CustomQuickIconHelper
 			        'linkadd' => Route::_('index.php?option=com_banners&view=banner&layout=edit'),
 			        'name'    => 'MOD_CUSTOM_QUICKICON_BANNER_MANAGER',
 			        'access'  => ['core.manage', 'com_banners', 'core.create', 'com_banners'],
+                    'class'   => 'quickicon-banners',
 			        'group'   => 'MOD_CUSTOM_QUICKICON_SITE',
 		        ];
 
@@ -450,6 +491,7 @@ class CustomQuickIconHelper
 			        'linkadd' => Route::_('index.php?option=com_contact&view=contact&layout=edit'),
 			        'name'    => 'MOD_CUSTOM_QUICKICON_CONTACT_MANAGER',
 			        'access'  => ['core.manage', 'com_contact', 'core.create', 'com_contact'],
+                    'class'   => 'quickicon-contacts',
 			        'group'   => 'MOD_CUSTOM_QUICKICON_SITE',
 		        ];
 
@@ -467,6 +509,7 @@ class CustomQuickIconHelper
 			        'linkadd' => Route::_('index.php?option=com_newsfeeds&view=newsfeed&layout=edit'),
 			        'name'    => 'MOD_CUSTOM_QUICKICON_NEWSFEEDS_MANAGER',
 			        'access'  => ['core.manage', 'com_newsfeeds', 'core.create', 'com_newsfeeds'],
+                    'class'   => 'quickicon-newsfeeds',
 			        'group'   => 'MOD_CUSTOM_QUICKICON_SITE',
 		        ];
 
@@ -484,6 +527,7 @@ class CustomQuickIconHelper
 			        'linkadd' => Route::_('index.php?option=com_redirect&view=link&layout=edit'),
 			        'name'    => 'MOD_CUSTOM_QUICKICON_REDIRECT_MANAGER',
 			        'access'  => ['core.manage', 'com_redirect', 'core.create', 'com_redirect'],
+                    'class'   => 'quickicon-redirects',
 			        'group'   => 'MOD_CUSTOM_QUICKICON_SITE',
 		        ];
 	        }
@@ -494,6 +538,7 @@ class CustomQuickIconHelper
 			        'link'   => Route::_('index.php?option=com_associations&view=associations'),
 			        'name'   => 'MOD_CUSTOM_QUICKICON_ASSOCIATIONS_MANAGER',
 			        'access' => ['core.manage', 'com_associations'],
+                    'class'  => 'quickicon-associations',
 			        'group'  => 'MOD_CUSTOM_QUICKICON_SITE',
 		        ];
 	        }
@@ -504,6 +549,7 @@ class CustomQuickIconHelper
 			        'link'   => Route::_('index.php?option=com_finder&view=index'),
 			        'name'   => 'MOD_CUSTOM_QUICKICON_FINDER_MANAGER',
 			        'access' => ['core.manage', 'com_finder'],
+                    'class'  => 'quickicon-finder',
 			        'group'  => 'MOD_CUSTOM_QUICKICON_SITE',
 		        ];
 	        }
@@ -515,6 +561,7 @@ class CustomQuickIconHelper
 			        'linkadd' => Route::_('index.php?option=com_installer&view=languages'),
 			        'name'    => 'MOD_CUSTOM_QUICKICON_LANGUAGES_MANAGER',
 			        'access'  => ['core.manage', 'com_languages'],
+                    'class'   => 'quickicon-languages',
 			        'group'   => 'MOD_CUSTOM_QUICKICON_SITE',
 		        ];
 
@@ -534,6 +581,7 @@ class CustomQuickIconHelper
                         'link'  => Route::_('index.php?option=com_djcatalog2&view=cpanel'),
                         'name'  => 'MOD_CUSTOM_QUICKICON_DJCATALOG',
                         'access'  => ['core.manage', 'com_djcatalog2'],
+                        'class'   => 'quickicon-djcatalog quickicon-djcatalog-dashboard',
                         'group' => $context,
                     ];
                 }
@@ -545,6 +593,7 @@ class CustomQuickIconHelper
                         'linkadd' => Route::_('index.php?option=com_djcatalog2&task=item.add'),
                         'name'    => 'MOD_CUSTOM_QUICKICON_PRODUCTS',
                         'access'  => ['core.manage', 'com_djcatalog2'],
+                        'class'   => 'quickicon-djcatalog quickicon-djcatalog-products',
                         'group'   => $context,
                     ];
                 }
@@ -556,6 +605,7 @@ class CustomQuickIconHelper
                         'linkadd' => Route::_('index.php?option=com_djcatalog2&task=category.add'),
                         'name'    => 'MOD_CUSTOM_QUICKICON_CATEGORIES',
                         'access'  => ['core.manage', 'com_djcatalog2'],
+                        'class'   => 'quickicon-djcatalog quickicon-djcatalog-categories',
                         'group'   => $context,
                     ];
                 }
@@ -566,6 +616,7 @@ class CustomQuickIconHelper
                         'link'  => Route::_('index.php?option=com_djcatalog2&view=customers'),
                         'name'  => 'MOD_CUSTOM_QUICKICON_USERS',
                         'access'  => ['core.manage', 'com_djcatalog2'],
+                        'class'   => 'quickicon-djcatalog quickicon-djcatalog-customers',
                         'group' => $context,
                     ];
                 }
@@ -577,6 +628,7 @@ class CustomQuickIconHelper
                         'linkadd' => Route::_('index.php?option=com_djcatalog2&task=order.add'),
                         'name'    => 'MOD_CUSTOM_QUICKICON_ORDERS',
                         'access'  => ['core.manage', 'com_djcatalog2'],
+                        'class'   => 'quickicon-djcatalog quickicon-djcatalog-orders',
                         'group'   => $context,
                     ];
                 }
@@ -588,6 +640,7 @@ class CustomQuickIconHelper
                         'linkadd' => Route::_('index.php?option=com_djcatalog2&task=subscription.add'),
                         'name'    => 'MOD_CUSTOM_QUICKICON_SUBSCRIPTIONS',
                         'access'  => ['core.manage', 'com_djcatalog2'],
+                        'class'   => 'quickicon-djcatalog quickicon-djcatalog-subscriptions',
                         'group'   => $context,
                     ];
                 }
@@ -599,6 +652,7 @@ class CustomQuickIconHelper
                         'linkadd' => Route::_('index.php?option=com_djcatalog2&task=pricerule.add'),
                         'name'    => 'MOD_CUSTOM_QUICKICON_PRICERULES',
                         'access'  => ['core.manage', 'com_djcatalog2'],
+                        'class'   => 'quickicon-djcatalog quickicon-djcatalog-pricerules',
                         'group'   => $context,
                     ];
                 }
@@ -610,6 +664,7 @@ class CustomQuickIconHelper
                         'linkadd' => Route::_('index.php?option=com_djcatalog2&task=coupon.add'),
                         'name'    => 'MOD_CUSTOM_QUICKICON_COUPONS',
                         'access'  => ['core.manage', 'com_djcatalog2'],
+                        'class'   => 'quickicon-djcatalog quickicon-djcatalog-coupons',
                         'group'   => $context,
                     ];
                 }
@@ -621,6 +676,7 @@ class CustomQuickIconHelper
                         'linkadd' => Route::_('index.php?option=com_djcatalog2&task=producer.add'),
                         'name'    => 'MOD_CUSTOM_QUICKICON_PRODUCERS',
                         'access'  => ['core.manage', 'com_djcatalog2'],
+                        'class'   => 'quickicon-djcatalog quickicon-djcatalog-producers',
                         'group'   => $context,
                     ];
                 }
@@ -632,6 +688,7 @@ class CustomQuickIconHelper
                         'linkadd' => Route::_('index.php?option=com_djcatalog2&task=vendor.add'),
                         'name'    => 'MOD_CUSTOM_QUICKICON_VENDORS',
                         'access'  => ['core.manage', 'com_djcatalog2'],
+                        'class'   => 'quickicon-djcatalog quickicon-djcatalog-vendors',
                         'group'   => $context,
                     ];
                 }
@@ -643,6 +700,7 @@ class CustomQuickIconHelper
                         'linkadd' => Route::_('index.php?option=com_djcatalog2&task=review.add'),
                         'name'    => 'MOD_CUSTOM_QUICKICON_REVIEWS',
                         'access'  => ['core.manage', 'com_djcatalog2'],
+                        'class'   => 'quickicon-djcatalog quickicon-djcatalog-reviews',
                         'group'   => $context,
                     ];
                 }
@@ -653,6 +711,7 @@ class CustomQuickIconHelper
                         'link'  => Route::_('index.php?option=com_djcatalog2&view=messages'),
                         'name'  => 'MOD_CUSTOM_QUICKICON_MESSAGES',
                         'access'  => ['core.manage', 'com_djcatalog2'],
+                        'class'   => 'quickicon-djcatalog quickicon-djcatalog-messages',
                         'group' => $context,
                     ];
                 }
@@ -663,6 +722,7 @@ class CustomQuickIconHelper
                         'link'  => Route::_('index.php?option=com_djcatalog2&view=prices'),
                         'name'  => 'MOD_CUSTOM_QUICKICON_PRICESSTOCK',
                         'access'  => ['core.manage', 'com_djcatalog2'],
+                        'class'   => 'quickicon-djcatalog quickicon-djcatalog-prices',
                         'group' => $context,
                     ];
                 }
@@ -673,6 +733,7 @@ class CustomQuickIconHelper
                         'link'  => Route::_('index.php?option=com_config&view=component&component=com_djcatalog2'),
                         'name'  => 'MOD_CUSTOM_QUICKICON_CONFIGURATION',
                         'access'  => ['core.manage', 'com_config'],
+                        'class'   => 'quickicon-djcatalog quickicon-djcatalog-config',
                         'group' => $context,
                     ];
                 }
@@ -687,6 +748,7 @@ class CustomQuickIconHelper
                         'link'  => Route::_('index.php?option=com_eshop&view=dashboard'),
                         'name'  => 'MOD_CUSTOM_QUICKICON_ESHOP',
                         'access'  => ['core.manage', 'com_eshop'],
+                        'class'   => 'quickicon-eshop quickicon-eshop-dashboard',
                         'group' => $context,
                     ];
                 }
@@ -698,6 +760,7 @@ class CustomQuickIconHelper
                         'linkadd' => Route::_('index.php?option=com_eshop&task=product.add'),
                         'name'    => 'MOD_CUSTOM_QUICKICON_PRODUCTS',
                         'access'  => ['core.manage', 'com_eshop'],
+                        'class'   => 'quickicon-eshop quickicon-eshop-products',
                         'group'   => $context,
                     ];
                 }
@@ -709,6 +772,7 @@ class CustomQuickIconHelper
                         'linkadd' => Route::_('index.php?option=com_eshop&task=download.add'),
                         'name'    => 'MOD_CUSTOM_QUICKICON_DOWNLOADS',
                         'access'  => ['core.manage', 'com_eshop'],
+                        'class'   => 'quickicon-eshop quickicon-eshop-downloads',
                         'group'   => $context,
                     ];
                 }
@@ -720,6 +784,7 @@ class CustomQuickIconHelper
                         'linkadd' => Route::_('index.php?option=com_eshop&task=category.add'),
                         'name'    => 'MOD_CUSTOM_QUICKICON_CATEGORIES',
                         'access'  => ['core.manage', 'com_eshop'],
+                        'class'   => 'quickicon-eshop quickicon-eshop-categories',
                         'group'   => $context,
                     ];
                 }
@@ -731,6 +796,7 @@ class CustomQuickIconHelper
                         'linkadd' => Route::_('index.php?option=com_eshop&task=customer.add'),
                         'name'    => 'MOD_CUSTOM_QUICKICON_USERS',
                         'access'  => ['core.manage', 'com_eshop'],
+                        'class'   => 'quickicon-eshop quickicon-eshop-customers',
                         'group'   => $context,
                     ];
                 }
@@ -741,6 +807,7 @@ class CustomQuickIconHelper
                         'link'  => Route::_('index.php?option=com_eshop&view=orders'),
                         'name'  => 'MOD_CUSTOM_QUICKICON_ORDERS',
                         'access'  => ['core.manage', 'com_eshop'],
+                        'class'   => 'quickicon-eshop quickicon-eshop-orders',
                         'group' => $context,
                     ];
                 }
@@ -751,6 +818,7 @@ class CustomQuickIconHelper
                         'link'  => Route::_('index.php?option=com_eshop&view=quotes'),
                         'name'  => 'MOD_CUSTOM_QUICKICON_QUOTES',
                         'access'  => ['core.manage', 'com_eshop'],
+                        'class'   => 'quickicon-eshop quickicon-eshop-quotes',
                         'group' => $context,
                     ];
                 }
@@ -762,6 +830,7 @@ class CustomQuickIconHelper
                         'linkadd' => Route::_('index.php?option=com_eshop&task=discount.add'),
                         'name'    => 'MOD_CUSTOM_QUICKICON_DISCOUNTS',
                         'access'  => ['core.manage', 'com_eshop'],
+                        'class'   => 'quickicon-eshop quickicon-eshop-discounts',
                         'group'   => $context,
                     ];
                 }
@@ -773,6 +842,7 @@ class CustomQuickIconHelper
                         'linkadd' => Route::_('index.php?option=com_eshop&task=coupon.add'),
                         'name'    => 'MOD_CUSTOM_QUICKICON_COUPONS',
                         'access'  => ['core.manage', 'com_eshop'],
+                        'class'   => 'quickicon-eshop quickicon-eshop-coupons',
                         'group'   => $context,
                     ];
                 }
@@ -784,6 +854,7 @@ class CustomQuickIconHelper
                         'linkadd' => Route::_('index.php?option=com_eshop&task=voucher.add'),
                         'name'    => 'MOD_CUSTOM_QUICKICON_VOUCHERS',
                         'access'  => ['core.manage', 'com_eshop'],
+                        'class'   => 'quickicon-eshop quickicon-eshop-vouchers',
                         'group'   => $context,
                     ];
                 }
@@ -795,6 +866,7 @@ class CustomQuickIconHelper
                         'linkadd' => Route::_('index.php?option=com_eshop&task=manufacturer.add'),
                         'name'    => 'MOD_CUSTOM_QUICKICON_MANUFACTURERS',
                         'access'  => ['core.manage', 'com_eshop'],
+                        'class'   => 'quickicon-eshop quickicon-eshop-manufacturers',
                         'group'   => $context,
                     ];
                 }
@@ -807,6 +879,7 @@ class CustomQuickIconHelper
                         'linkadd' => Route::_('index.php?option=com_eshop&task=review.add'),
                         'name'    => 'MOD_CUSTOM_QUICKICON_REVIEWS',
                         'access'  => ['core.manage', 'com_eshop'],
+                        'class'   => 'quickicon-eshop quickicon-eshop-reviews',
                         'group'   => $context,
                     ];
                 }
@@ -817,6 +890,7 @@ class CustomQuickIconHelper
                         'link'  => Route::_('index.php?option=com_eshop&view=notify'),
                         'name'  => 'MOD_CUSTOM_QUICKICON_MESSAGES',
                         'access'  => ['core.manage', 'com_eshop'],
+                        'class'   => 'quickicon-eshop quickicon-eshop-notify',
                         'group' => $context,
                     ];
                 }
@@ -827,6 +901,7 @@ class CustomQuickIconHelper
                         'link'  => Route::_('index.php?option=com_eshop&view=configuration'),
                         'name'  => 'MOD_CUSTOM_QUICKICON_CONFIGURATION',
                         'access'  => ['core.manage', 'com_eshop'],
+                        'class'   => 'quickicon-eshop quickicon-eshop-config',
                         'group' => $context,
                     ];
                 }
@@ -841,6 +916,7 @@ class CustomQuickIconHelper
                         'link'  => Route::_('index.php?option=com_hikashop'),
                         'name'  => 'MOD_CUSTOM_QUICKICON_HIKASHOP',
                         'access'  => ['core.manage', 'com_hikashop'],
+                        'class'   => 'quickicon-hikashop quickicon-hikashop-dashboard',
                         'group' => $context,
                     ];
                 }
@@ -852,6 +928,7 @@ class CustomQuickIconHelper
                         'linkadd' => Route::_('index.php?option=com_hikashop&ctrl=product&task=add'),
                         'name'    => 'MOD_CUSTOM_QUICKICON_PRODUCTS',
                         'access'  => ['core.manage', 'com_hikashop'],
+                        'class'   => 'quickicon-hikashop quickicon-hikashop-products',
                         'group'   => $context,
                     ];
                 }
@@ -863,6 +940,7 @@ class CustomQuickIconHelper
                         'linkadd' => Route::_('index.php?option=com_hikashop&ctrl=category&task=add'),
                         'name'    => 'MOD_CUSTOM_QUICKICON_CATEGORIES',
                         'access'  => ['core.manage', 'com_hikashop'],
+                        'class'   => 'quickicon-hikashop quickicon-hikashop-categories',
                         'group'   => $context,
                     ];
                 }
@@ -873,6 +951,7 @@ class CustomQuickIconHelper
                         'link'  => Route::_('index.php?option=com_hikashop&ctrl=user&filter_partner=0'),
                         'name'  => 'MOD_CUSTOM_QUICKICON_USERS',
                         'access'  => ['core.manage', 'com_hikashop'],
+                        'class'   => 'quickicon-hikashop quickicon-hikashop-users',
                         'group' => $context,
                     ];
                 }
@@ -884,6 +963,7 @@ class CustomQuickIconHelper
                         'linkadd' => Route::_('index.php?option=com_hikashop&ctrl=order&task=neworder'),
                         'name'    => 'MOD_CUSTOM_QUICKICON_ORDERS',
                         'access'  => ['core.manage', 'com_hikashop'],
+                        'class'   => 'quickicon-hikashop quickicon-hikashop-orders',
                         'group'   => $context,
                     ];
                 }
@@ -895,6 +975,7 @@ class CustomQuickIconHelper
                         'linkadd' => Route::_('index.php?option=com_hikashop&ctrl=discount&discount_type=discount&task=add'),
                         'name'    => 'MOD_CUSTOM_QUICKICON_DISCOUNTS',
                         'access'  => ['core.manage', 'com_hikashop'],
+                        'class'   => 'quickicon-hikashop quickicon-hikashop-discounts',
                         'group'   => $context,
                     ];
                 }
@@ -906,6 +987,7 @@ class CustomQuickIconHelper
                         'linkadd' => Route::_('index.php?option=com_hikashop&ctrl=discount&discount_type=coupon&task=add'),
                         'name'    => 'MOD_CUSTOM_QUICKICON_COUPONS',
                         'access'  => ['core.manage', 'com_hikashop'],
+                        'class'   => 'quickicon-hikashop quickicon-hikashop-coupons',
                         'group'   => $context,
                     ];
                 }
@@ -917,6 +999,7 @@ class CustomQuickIconHelper
                         'linkadd' => Route::_('index.php?option=com_hikashop&ctrl=cart&cart_type=cart&task=add'),
                         'name' => 'MOD_CUSTOM_QUICKICON_CARTS',
                         'access'  => ['core.manage', 'com_hikashop'],
+                        'class'   => 'quickicon-hikashop quickicon-hikashop-carts',
                         'group' => $context,
                     ];
                 }
@@ -928,6 +1011,7 @@ class CustomQuickIconHelper
                         'linkadd' => Route::_('index.php?option=com_hikashop&ctrl=cart&cart_type=wishlist&task=add'),
                         'name'    => 'MOD_CUSTOM_QUICKICON_WISHLIST',
                         'access'  => ['core.manage', 'com_hikashop'],
+                        'class'   => 'quickicon-hikashop quickicon-hikashop-wishlist',
                         'group'   => $context,
                     ];
                 }
@@ -939,6 +1023,7 @@ class CustomQuickIconHelper
                         'linkadd' => Route::_('index.php?option=com_hikashop&ctrl=waitlist&task=add'),
                         'name' => 'MOD_CUSTOM_QUICKICON_WAITLIST',
                         'access'  => ['core.manage', 'com_hikashop'],
+                        'class'   => 'quickicon-hikashop quickicon-hikashop-waitlist',
                         'group' => $context,
                     ];
                 }
@@ -949,6 +1034,7 @@ class CustomQuickIconHelper
                         'link'  => Route::_('index.php?option=com_hikashop&ctrl=email_history'),
                         'name'  => 'MOD_CUSTOM_QUICKICON_EMAILHISTORY',
                         'access'  => ['core.manage', 'com_hikashop'],
+                        'class'   => 'quickicon-hikashop quickicon-hikashop-emailhistory',
                         'group' => $context,
                     ];
                 }
@@ -959,6 +1045,7 @@ class CustomQuickIconHelper
                         'link'  => Route::_('index.php?option=com_hikashop&ctrl=config'),
                         'name'  => 'MOD_CUSTOM_QUICKICON_CONFIGURATION',
                         'access'  => ['core.manage', 'com_hikashop'],
+                        'class'   => 'quickicon-hikashop quickicon-hikashop-config',
                         'group' => $context,
                     ];
                 }
@@ -972,6 +1059,7 @@ class CustomQuickIconHelper
                         'link'  => Route::_('index.php?option=com_j2store'),
                         'name'  => 'MOD_CUSTOM_QUICKICON_J2STORE',
                         'access'  => ['core.manage', 'com_j2store'],
+                        'class'   => 'quickicon-j2store quickicon-j2store-dashboard',
                         'group' => $context,
                     ];
                 }
@@ -983,6 +1071,7 @@ class CustomQuickIconHelper
                         'linkadd' => Route::_('index.php?option=com_content&view=article&layout=edit'),
                         'name'    => 'MOD_CUSTOM_QUICKICON_PRODUCTS',
                         'access'  => ['core.manage', 'com_j2store'],
+                        'class'   => 'quickicon-j2store quickicon-j2store-products',
                         'group'   => $context,
                     ];
                 }
@@ -993,6 +1082,7 @@ class CustomQuickIconHelper
                         'link'  => Route::_('index.php?option=com_j2store&view=inventories'),
                         'name'  => 'MOD_CUSTOM_QUICKICON_INVENTORY',
                         'access'  => ['core.manage', 'com_j2store'],
+                        'class'   => 'quickicon-j2store quickicon-j2store-inventories',
                         'group' => $context,
                     ];
                 }
@@ -1004,6 +1094,7 @@ class CustomQuickIconHelper
                         'linkadd' => Route::_('index.php?option=com_j2store&view=vendors&task=add'),
                         'name'    => 'MOD_CUSTOM_QUICKICON_VENDORS',
                         'access'  => ['core.manage', 'com_j2store'],
+                        'class'   => 'quickicon-j2store quickicon-j2store-vendors',
                         'group'   => $context,
                     ];
                 }
@@ -1015,6 +1106,7 @@ class CustomQuickIconHelper
                         'linkadd' => Route::_('index.php?option=com_j2store&view=manufacturers&task=add'),
                         'name'    => 'MOD_CUSTOM_QUICKICON_MANUFACTURERS',
                         'access'  => ['core.manage', 'com_j2store'],
+                        'class'   => 'quickicon-j2store quickicon-j2store-manufacturers',
                         'group'   => $context,
                     ];
                 }
@@ -1025,6 +1117,7 @@ class CustomQuickIconHelper
                         'link'  => Route::_('index.php?option=com_j2store&view=orders'),
                         'name'  => 'MOD_CUSTOM_QUICKICON_ORDERS',
                         'access'  => ['core.manage', 'com_j2store'],
+                        'class'   => 'quickicon-j2store quickicon-j2store-orders',
                         'group' => $context,
                     ];
                 }
@@ -1035,6 +1128,7 @@ class CustomQuickIconHelper
                         'link'  => Route::_('index.php?option=com_j2store&view=customers'),
                         'name'  => 'MOD_CUSTOM_QUICKICON_USERS',
                         'access'  => ['core.manage', 'com_j2store'],
+                        'class'   => 'quickicon-j2store quickicon-j2store-customers',
                         'group' => $context,
                     ];
                 }
@@ -1046,6 +1140,7 @@ class CustomQuickIconHelper
                         'linkadd' => Route::_('index.php?option=com_j2store&view=coupons&task=add'),
                         'name'    => 'MOD_CUSTOM_QUICKICON_COUPONS',
                         'access'  => ['core.manage', 'com_j2store'],
+                        'class'   => 'quickicon-j2store quickicon-j2store-coupons',
                         'group'   => $context,
                     ];
                 }
@@ -1057,6 +1152,7 @@ class CustomQuickIconHelper
                         'linkadd' => Route::_('index.php?option=com_j2store&view=vouchers&task=add'),
                         'name'    => 'MOD_CUSTOM_QUICKICON_VOUCHERS',
                         'access'  => ['core.manage', 'com_j2store'],
+                        'class'   => 'quickicon-j2store quickicon-j2store-vouchers',
                         'group'   => $context,
                     ];
                 }
@@ -1067,6 +1163,7 @@ class CustomQuickIconHelper
                         'link'  => Route::_('index.php?option=com_j2store&view=reports'),
                         'name'  => 'MOD_CUSTOM_QUICKICON_REPORTS',
                         'access'  => ['core.manage', 'com_j2store'],
+                        'class'   => 'quickicon-j2store quickicon-j2store-reports',
                         'group' => $context,
                     ];
                 }
@@ -1077,6 +1174,7 @@ class CustomQuickIconHelper
                         'link'  => Route::_('index.php?option=com_j2store&view=configuration'),
                         'name'  => 'MOD_CUSTOM_QUICKICON_CONFIGURATION',
                         'access'  => ['core.manage', 'com_j2store'],
+                        'class'   => 'quickicon-j2store quickicon-j2store-config',
                         'group' => $context,
                     ];
                 }
@@ -1090,6 +1188,7 @@ class CustomQuickIconHelper
                         'link'  => Route::_('index.php?option=com_phocacart&view=phocacartcp'),
                         'name'  => 'MOD_CUSTOM_QUICKICON_PHOCACART',
                         'access'  => ['core.manage', 'com_phocacart'],
+                        'class'   => 'quickicon-phocacart quickicon-phocacart-dashboard',
                         'group' => $context,
                     ];
                 }
@@ -1101,6 +1200,7 @@ class CustomQuickIconHelper
                         'linkadd' => Route::_('index.php?option=com_phocacart&task="phocacartitem.add"'),
                         'name'    => 'MOD_CUSTOM_QUICKICON_PRODUCTS',
                         'access'  => ['core.manage', 'com_phocacart'],
+                        'class'   => 'quickicon-phocacart quickicon-phocacart-products',
                         'group'   => $context,
                     ];
                 }
@@ -1112,6 +1212,7 @@ class CustomQuickIconHelper
                         'linkadd' => Route::_('index.php?option=com_phocacart&task=phocacartcategory.add'),
                         'name'    => 'MOD_CUSTOM_QUICKICON_CATEGORIES',
                         'access'  => ['core.manage', 'com_phocacart'],
+                        'class'   => 'quickicon-phocacart quickicon-phocacart-categories',
                         'group'   => $context,
                     ];
                 }
@@ -1123,6 +1224,7 @@ class CustomQuickIconHelper
                         'linkadd' => Route::_('index.php?option=com_phocacart&task=phocacartuser.add'),
                         'name'    => 'MOD_CUSTOM_QUICKICON_USERS',
                         'access'  => ['core.manage', 'com_phocacart'],
+                        'class'   => 'quickicon-phocacart quickicon-phocacart-customers',
                         'group'   => $context,
                     ];
                 }
@@ -1133,6 +1235,7 @@ class CustomQuickIconHelper
                         'link'  => Route::_('index.php?option=com_phocacart&view=phocacartorders'),
                         'name'  => 'MOD_CUSTOM_QUICKICON_ORDERS',
                         'access'  => ['core.manage', 'com_phocacart'],
+                        'class'   => 'quickicon-phocacart quickicon-phocacart-orders',
                         'group' => $context,
                     ];
                 }
@@ -1144,6 +1247,7 @@ class CustomQuickIconHelper
                         'linkadd' => Route::_('index.php?option=com_phocacart&task=phocacartwishlist.add'),
                         'name'    => 'MOD_CUSTOM_QUICKICON_WISHLIST',
                         'access'  => ['core.manage', 'com_phocacart'],
+                        'class'   => 'quickicon-phocacart quickicon-phocacart-wishlists',
                         'group'   => $context,
                     ];
                 }
@@ -1155,6 +1259,7 @@ class CustomQuickIconHelper
                         'linkadd' => Route::_('index.php?option=com_phocacart&task=phocacartreward.add'),
                         'name'    => 'MOD_CUSTOM_QUICKICON_REWARDS',
                         'access'  => ['core.manage', 'com_phocacart'],
+                        'class'   => 'quickicon-phocacart quickicon-phocacart-rewards',
                         'group'   => $context,
                     ];
                 }
@@ -1166,6 +1271,7 @@ class CustomQuickIconHelper
                         'linkadd' => Route::_('index.php?option=com_phocacart&task=phocacartquestion.add'),
                         'name'    => 'MOD_CUSTOM_QUICKICON_QUESTIONS',
                         'access'  => ['core.manage', 'com_phocacart'],
+                        'class'   => 'quickicon-phocacart quickicon-phocacart-questions',
                         'group'   => $context,
                     ];
                 }
@@ -1177,6 +1283,7 @@ class CustomQuickIconHelper
                         'linkadd' => Route::_('index.php?option=com_phocacart&task=phocacartdiscount.add'),
                         'name'    => 'MOD_CUSTOM_QUICKICON_DISCOUNTS',
                         'access'  => ['core.manage', 'com_phocacart'],
+                        'class'   => 'quickicon-phocacart quickicon-phocacart-discounts',
                         'group'   => $context,
                     ];
                 }
@@ -1188,6 +1295,7 @@ class CustomQuickIconHelper
                         'linkadd' => Route::_('index.php?option=com_phocacart&task=phocacartcoupon.add'),
                         'name'    => 'MOD_CUSTOM_QUICKICON_COUPONS',
                         'access'  => ['core.manage', 'com_phocacart'],
+                        'class'   => 'quickicon-phocacart quickicon-phocacart-coupons',
                         'group'   => $context,
                     ];
                 }
@@ -1199,6 +1307,7 @@ class CustomQuickIconHelper
                         'linkadd' => Route::_('index.php?option=com_phocacart&task=phocacartmanufacturer.add'),
                         'name' => 'MOD_CUSTOM_QUICKICON_MANUFACTURERS',
                         'access'  => ['core.manage', 'com_phocacart'],
+                        'class'   => 'quickicon-phocacart quickicon-phocacart-manufacturers',
                         'group' => $context,
                     ];
                 }
@@ -1210,6 +1319,7 @@ class CustomQuickIconHelper
                         'linkadd' => Route::_('index.php?option=com_phocacart&task=phocacartvendor.add'),
                         'name'    => 'MOD_CUSTOM_QUICKICON_VENDORS',
                         'access'  => ['core.manage', 'com_phocacart'],
+                        'class'   => 'quickicon-phocacart quickicon-phocacart-vendors',
                         'group'   => $context,
                     ];
                 }
@@ -1221,6 +1331,7 @@ class CustomQuickIconHelper
                         'linkadd' => Route::_('index.php?option=com_phocacart&task=phocacartreview.add'),
                         'name'    => 'MOD_CUSTOM_QUICKICON_REVIEWS',
                         'access'  => ['core.manage', 'com_phocacart'],
+                        'class'   => 'quickicon-phocacart quickicon-phocacart-reviews',
                         'group'   => $context,
                     ];
                 }
@@ -1231,6 +1342,7 @@ class CustomQuickIconHelper
                         'link'  => Route::_('index.php?option=com_phocacart&view=phocacartreports'),
                         'name'  => 'MOD_CUSTOM_QUICKICON_REPORTS',
                         'access'  => ['core.manage', 'com_phocacart'],
+                        'class'   => 'quickicon-phocacart quickicon-phocacart-reports',
                         'group' => $context,
                     ];
                 }
@@ -1242,6 +1354,7 @@ class CustomQuickIconHelper
                         'linkadd' => Route::_('index.php?option=com_phocacart&task=phocacarttime.add'),
                         'name'    => 'MOD_CUSTOM_QUICKICON_OPENINGTIMES',
                         'access'  => ['core.manage', 'com_phocacart'],
+                        'class'   => 'quickicon-phocacart quickicon-phocacart-openingtimes',
                         'group'   => $context,
                     ];
                 }
@@ -1252,6 +1365,7 @@ class CustomQuickIconHelper
                         'link'  => Route::_('index.php?option=com_config&view=component&component=com_phocacart'),
                         'name'  => 'MOD_CUSTOM_QUICKICON_CONFIGURATION',
                         'access'  => ['core.manage', 'com_config'],
+                        'class'   => 'quickicon-phocacart quickicon-phocacart-config',
                         'group' => $context,
                     ];
                 }
@@ -1266,6 +1380,7 @@ class CustomQuickIconHelper
                         'linkadd' => Route::_('index.php?option=com_virtuemart&view=product&task=add'),
                         'name'    => 'MOD_CUSTOM_QUICKICON_PRODUCTS',
                         'access'  => ['core.manage', 'com_virtuemart'],
+                        'class'   => 'quickicon-vm quickicon-vm-dashboard',
                         'group'   => $context,
                     ];
                 }
@@ -1277,6 +1392,7 @@ class CustomQuickIconHelper
                         'linkadd' => Route::_('index.php?option=com_virtuemart&view=category&task=add'),
                         'name'    => 'MOD_CUSTOM_QUICKICON_CATEGORIES',
                         'access'  => ['core.manage', 'com_virtuemart'],
+                        'class'   => 'quickicon-vm quickicon-vm-categories',
                         'group'   => $context,
                     ];
                 }
@@ -1287,6 +1403,7 @@ class CustomQuickIconHelper
                         'link'  => Route::_('index.php?option=com_virtuemart&view=user'),
                         'name'  => 'MOD_CUSTOM_QUICKICON_USERS',
                         'access'  => ['core.manage', 'com_virtuemart'],
+                        'class'   => 'quickicon-vm quickicon-vm-shoppers',
                         'group' => $context,
                     ];
                 }
@@ -1297,6 +1414,7 @@ class CustomQuickIconHelper
                         'link'  => Route::_('index.php?option=com_virtuemart&view=orders'),
                         'name'  => 'MOD_CUSTOM_QUICKICON_ORDERS',
                         'access'  => ['core.manage', 'com_virtuemart'],
+                        'class'   => 'quickicon-vm quickicon-vm-orders',
                         'group' => $context,
                     ];
                 }
@@ -1308,6 +1426,7 @@ class CustomQuickIconHelper
                         'linkadd' => Route::_('index.php?option=com_virtuemart&view=coupon&task=add'),
                         'name'    => 'MOD_CUSTOM_QUICKICON_COUPONS',
                         'access'  => ['core.manage', 'com_virtuemart'],
+                        'class'   => 'quickicon-vm quickicon-vm-coupons',
                         'group'   => $context,
                     ];
                 }
@@ -1318,6 +1437,7 @@ class CustomQuickIconHelper
                         'link'  => Route::_('index.php?option=com_virtuemart&view=ratings'),
                         'name'  => 'MOD_CUSTOM_QUICKICON_REVIEWS',
                         'access'  => ['core.manage', 'com_virtuemart'],
+                        'class'   => 'quickicon-vm quickicon-vm-reviews',
                         'group' => $context,
                     ];
                 }
@@ -1329,6 +1449,7 @@ class CustomQuickIconHelper
                         'linkadd' => Route::_('index.php?option=com_virtuemart&view=manufacturer&task=add'),
                         'name'    => 'MOD_CUSTOM_QUICKICON_MANUFACTURERS',
                         'access'  => ['core.manage', 'com_virtuemart'],
+                        'class'   => 'quickicon-vm quickicon-vm-manufacturers',
                         'group'   => $context,
                     ];
                 }
@@ -1339,6 +1460,7 @@ class CustomQuickIconHelper
                         'link'  => Route::_('index.php?option=com_virtuemart&view=report'),
                         'name'  => 'MOD_CUSTOM_QUICKICON_SALESREPORT',
                         'access'  => ['core.manage', 'com_virtuemart'],
+                        'class'   => 'quickicon-vm quickicon-vm-salesreport',
                         'group' => $context,
                     ];
                 }
@@ -1349,6 +1471,7 @@ class CustomQuickIconHelper
                         'link'  => Route::_('index.php?option=com_virtuemart&view=inventory'),
                         'name'  => 'MOD_CUSTOM_QUICKICON_INVENTORY',
                         'access'  => ['core.manage', 'com_virtuemart'],
+                        'class'   => 'quickicon-vm quickicon-vm-inventory',
                         'group' => $context,
                     ];
                 }
@@ -1359,6 +1482,7 @@ class CustomQuickIconHelper
                         'link'  => Route::_('index.php?option=com_virtuemart&view=config'),
                         'name'  => 'MOD_CUSTOM_QUICKICON_CONFIGURATION',
                         'access'  => ['core.manage', 'com_virtuemart'],
+                        'class'   => 'quickicon-vm quickicon-vm-config',
                         'group' => $context,
                     ];
                 }
@@ -1373,6 +1497,7 @@ class CustomQuickIconHelper
                     'image' => $item->item_icon,
                     'name' => $item->item_name,
                     'group' => $context,
+                    'class'   => 'quickicon-custom quickicon-' . strtolower(str_replace(' ', '-',$item->item_name)),
                 ];
 
                 if ($item->item_link_target) {
