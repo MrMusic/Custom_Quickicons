@@ -48,6 +48,11 @@ if ($matches[1] != "214") {
         .custom-quick-icons-' . $module->id . ' .quickicon-linkadd a:hover {
             background: hsl(var(--hue-' . $module->id . '),40%,20%);
         }
+        .quick-icons .quickicon a:hover .quickicon-icon, 
+        .quick-icons .quickicon a:focus .quickicon-icon, 
+        .quick-icons .quickicon a:active .quickicon-icon {
+            color: var(--icon-color);
+        }
         .quickicon a[target=_blank]:before {
             display: none;
         }
