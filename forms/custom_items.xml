@@ -30,12 +30,12 @@
             value_field="link"
             >
             <option value="custom">MOD_CUSTOM_QUICKICON_ITEM_LINK_MENUITEM_CUSTOM_URL</option>
-            <option value="content">MOD_CUSTOM_QUICKICON_ITEM_LINK_MENUITEM_DASHBOARD_CONTENT</option>
-            <option value="menus">MOD_CUSTOM_QUICKICON_ITEM_LINK_MENUITEM_DASHBOARD_MENUS</option>
-            <option value="components">MOD_CUSTOM_QUICKICON_ITEM_LINK_MENUITEM_DASHBOARD_COMPONENTS</option>
-            <option value="users">MOD_CUSTOM_QUICKICON_ITEM_LINK_MENUITEM_DASHBOARD_USERS</option>
-            <option value="system">MOD_CUSTOM_QUICKICON_ITEM_LINK_MENUITEM_DASHBOARD_SYSTEM</option>
-            <option value="help">MOD_CUSTOM_QUICKICON_ITEM_LINK_MENUITEM_DASHBOARD_HELP</option>
+            <option value="index.php?option=com_cpanel&amp;view=cpanel&amp;dashboard=content">MOD_CUSTOM_QUICKICON_ITEM_LINK_MENUITEM_DASHBOARD_CONTENT</option>
+            <option value="index.php?option=com_cpanel&amp;view=cpanel&amp;dashboard=menus">MOD_CUSTOM_QUICKICON_ITEM_LINK_MENUITEM_DASHBOARD_MENUS</option>
+            <option value="index.php?option=com_cpanel&amp;view=cpanel&amp;dashboard=components">MOD_CUSTOM_QUICKICON_ITEM_LINK_MENUITEM_DASHBOARD_COMPONENTS</option>
+            <option value="index.php?option=com_cpanel&amp;view=cpanel&amp;dashboard=users">MOD_CUSTOM_QUICKICON_ITEM_LINK_MENUITEM_DASHBOARD_USERS</option>
+            <option value="index.php?option=com_cpanel&amp;view=cpanel&amp;dashboard=system">MOD_CUSTOM_QUICKICON_ITEM_LINK_MENUITEM_DASHBOARD_SYSTEM</option>
+            <option value="index.php?option=com_cpanel&amp;view=cpanel&amp;dashboard=help">MOD_CUSTOM_QUICKICON_ITEM_LINK_MENUITEM_DASHBOARD_HELP</option>
         </field>
         <field
             name="item_link"
