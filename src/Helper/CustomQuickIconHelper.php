@@ -1518,7 +1518,9 @@ class CustomQuickIconHelper
                 if ($link) {
                     parse_str($link, $linkParameters);
                     $component = $linkParameters['option'];
-                    $quickicon['access'] = ['core.manage', $component];
+					if ($component != 'com_cpanel') {
+						$quickicon['access'] = ['core.manage', $component];
+					}
                 }
 
                 $this->buttons[$key][] = $quickicon;
