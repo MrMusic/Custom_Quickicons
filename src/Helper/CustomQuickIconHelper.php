@@ -12,6 +12,7 @@ namespace Joomill\Module\Customquickicon\Administrator\Helper;
 defined('_JEXEC') or die;
 
 use Joomla\CMS\Application\CMSApplication;
+use Joomla\CMS\Application\ApplicationHelper;
 use Joomla\CMS\Component\ComponentHelper;
 use Joomla\CMS\Factory;
 use Joomla\CMS\Plugin\PluginHelper;
@@ -63,7 +64,6 @@ class CustomQuickIconHelper
 
             $this->buttons[$key] = [];
 
-
             if ($params->get('show_robots')) {
                 $robotsstatus = ucwords($application->get('robots') ?? '');
                 if ((empty($robotsstatus)) && ($params->get('show_robots') == 1)) {
@@ -91,9 +91,7 @@ class CustomQuickIconHelper
                 if ((!empty($robotsstatus) && ($params->get('show_robots') == 3))) {
                     $alertdangertext = Text::sprintf('MOD_CUSTOM_QUICKICON_MESSAGE', $robotsstatus);
                     $application->enqueueMessage($alertdangertext, 'danger');
-                }   
-
-                
+                }
             } 
 
             // JOOMLA DEFAULT QUICKICONS
@@ -231,26 +229,26 @@ class CustomQuickIconHelper
                     'linkadd' => Route::_('index.php?option=com_content&task=article.add'),
                     'name'    => $title,
                     'access'  => ['core.manage', 'com_content', 'core.create', 'com_content'],
-                    'class'   => 'quickicon-category quickicon-category-' . str_replace(' ', '-',$item->item_name),
+                    'class'   => 'quickicon-category quickicon-category-' . ApplicationHelper::stringURLSafe($item->item_name),
                     'group'   => $context,
                 ];
 
                 if ($item->article_category) {
                     $quickicon['link'] .= '&filter[category_id]=' . $item->article_category;
                     $quickicon['linkadd'] .= '&catid=' . $item->article_category;
-                    $quickicon['class'] .= ' quickicon-category-' . $item->article_category;
+                    $quickicon['class'] .= ' quickicon-category-catid-' . $item->article_category;
                 }
                 if ($item->article_language != "*") {
                     $quickicon['link'] .= '&filter[language]=' . $item->article_language;
                     $quickicon['linkadd'] .= '&language=' . $item->article_language;
-                    $quickicon['class'] .= ' quickicon-category-' . strtolower($item->article_language);
+                    $quickicon['class'] .= ' quickicon-category-language-' . ApplicationHelper::stringURLSafe($item->article_language);
                 }
                 if ($item->article_author) {
                     if ($item->article_author == "current") {
                         $item->article_author = Factory::getUser()->id;
                     }
                     $quickicon['link'] .= '&filter[author_id]=' . $item->article_author;
-                    $quickicon['class'] .= ' quickicon-category-author-' . $item->article_author;
+                    $quickicon['class'] .= ' quickicon-category-authorid-' . $item->article_author;
                 }
                 if (isset($item->article_search) && $item->article_search != "") {
                     $quickicon['link'] .= '&filter[search]=' . $item->article_search;
@@ -259,7 +257,7 @@ class CustomQuickIconHelper
                 if (isset($item->article_tag) && $item->article_tag != "") {
                     foreach ($item->article_tag as $tag){
                         $quickicon['link'] .= '&filter[tag][]=' . $tag;
-                        $quickicon['class'] .= ' quickicon-category-' . $tag;
+                        $quickicon['class'] .= ' quickicon-category-tagid-' . $tag;
                     }
                 } 
                 
@@ -1497,7 +1495,7 @@ class CustomQuickIconHelper
                     'image' => $item->item_icon,
                     'name' => $item->item_name,
                     'group' => $context,
-                    'class'   => 'quickicon-custom quickicon-' . strtolower(str_replace(' ', '-',$item->item_name)),
+                    'class'   => 'quickicon-custom quickicon-' . ApplicationHelper::stringURLSafe($item->item_name),
                 ];
 
                 if ($item->item_link_target) {
