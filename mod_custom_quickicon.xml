@@ -328,6 +328,70 @@
                 </field>
             </fieldset>
 
+            <fieldset name="joomgallery">
+                <field
+                        name="show_joomgallery_control_panel"
+                        type="radio"
+                        label="MOD_CUSTOM_QUICKICON_SHOW_JOOMGALLERY_CONTROL_LABEL"
+                        layout="joomla.form.field.radio.switcher"
+                        default="1"
+                >
+                    <option value="0">JHIDE</option>
+                    <option value="1">JSHOW</option>
+                </field>
+                <field
+                        name="show_joomgallery_images"
+                        type="radio"
+                        label="MOD_CUSTOM_QUICKICON_SHOW_JOOMGALLERY_IMAGES_LABEL"
+                        layout="joomla.form.field.radio.switcher"
+                        default="1"
+                >
+                    <option value="0">JHIDE</option>
+                    <option value="1">JSHOW</option>
+                </field>
+                <field
+                        name="show_joomgallery_upload"
+                        type="radio"
+                        label="MOD_CUSTOM_QUICKICON_SHOW_JOOMGALLERY_UPLOAD_LABEL"
+                        layout="joomla.form.field.radio.switcher"
+                        default="1"
+                >
+                    <option value="0">JHIDE</option>
+                    <option value="1">JSHOW</option>
+                </field>
+                <field
+                        name="show_joomgallery_categories"
+                        type="radio"
+                        label="MOD_CUSTOM_QUICKICON_SHOW_JOOMGALLERY_CATEGORIES_LABEL"
+                        layout="joomla.form.field.radio.switcher"
+                        default="1"
+                >
+                    <option value="0">JHIDE</option>
+                    <option value="1">JSHOW</option>
+                </field>
+
+                <field
+                        name="show_joomgallery_configs"
+                        type="radio"
+                        label="MOD_CUSTOM_QUICKICON_SHOW_JOOMGALLERY_CONFIGSETS_LABEL"
+                        layout="joomla.form.field.radio.switcher"
+                        default="1"
+                >
+                    <option value="0">JHIDE</option>
+                    <option value="1">JSHOW</option>
+                </field>
+                <field
+                        name="show_joomgallery_tags"
+                        type="radio"
+                        label="MOD_CUSTOM_QUICKICON_SHOW_JOOMGALLERY_TAGS_LABEL"
+                        layout="joomla.form.field.radio.switcher"
+                        default="1"
+                >
+                    <option value="0">JHIDE</option>
+                    <option value="1">JSHOW</option>
+                </field>
+            </fieldset>
+
             <fieldset name="ecommerce">
                 <field
                         name="ecommerce_component"
