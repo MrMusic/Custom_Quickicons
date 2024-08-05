@@ -226,7 +226,7 @@ class CustomQuickIconHelper
                 $quickicon = [
                     'image'   => $item->item_icon,
                     'link'    => Route::_("index.php?option=com_content&view=articles"),
-                    'linkadd' => Route::_('index.php?option=com_content&task=article.add'),
+                    'linkadd' => Route::_("index.php?option=com_content&view=article&layout=edit"),
                     'name'    => $title,
                     'access'  => ['core.manage', 'com_content', 'core.create', 'com_content'],
                     'class'   => 'quickicon-category quickicon-category-' . ApplicationHelper::stringURLSafe($item->item_name),
