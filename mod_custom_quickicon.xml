@@ -1224,6 +1224,23 @@
                         default="hsl(214,63%,20%)"
                 />
                 <field
+                        name="fakit"
+                        type="text"
+                        label="MOD_CUSTOM_QUICKICON_FAKIT_LABEL"
+                        default=""
+                />
+                <field
+                        name="fakit_code"
+                        type="radio"
+                        label="MOD_CUSTOM_QUICKICON_FAKIT_CODE_LABEL"
+                        class="btn-group"
+                        default="css"
+                        showon="fakit!:"
+                >
+                    <option value="js">JavaScript</option>
+                    <option value="css">CSS only</option>
+                </field>
+                <field
                     name="layout"
                     type="modulelayout"
                     label="JFIELD_ALT_LAYOUT_LABEL"

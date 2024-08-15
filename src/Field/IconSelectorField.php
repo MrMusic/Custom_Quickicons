@@ -13,6 +13,7 @@ use Joomill\Module\Customquickicon\Administrator\Helper\ModalHelper;
 use Joomla\CMS\Factory;
 use Joomla\CMS\Form\FormField;
 use Joomla\CMS\Language\Text;
+use Joomla\CMS\MVC\Model\BaseDatabaseModel;
 
 // No direct access.
 defined('_JEXEC') or die;
@@ -48,6 +49,21 @@ class IconSelectorField extends FormField {
         $wa->registerAndUseScript('modalhelper', 'mod_custom_quickicon/modalhelper.js', ['defer' => true], []);
         $wa->registerAndUseStyle('backendCSS', 'mod_custom_quickicon/backend.css', ['relative' => true, 'version' => 'auto'], ['nomodule' => true, 'defer' => true]);
 
+        $app = Factory::getApplication();
+        $moduleId = $app->input->getInt('id');
+        $model = BaseDatabaseModel::getInstance('Module', 'ModulesModel');
+        $model->setState('module.id', $moduleId);
+        $module = $model->getItem();
+        $params = new \JRegistry($module->params);
+
+        if ($params->get('fakit')) {
+            if ($params->get('fakit_code') == "js") {
+                $wa->registerAndUseScript('fontawesomekit', 'https://kit.fontawesome.com/' . $params->get('fakit') . '.js', ['crossorigin=' => 'anonymous'], []);
+            }
+            if ($params->get('fakit_code') == "css") {
+                $wa->registerAndUseStyle('fontawesomekit', 'https://kit.fontawesome.com/' . $params->get('fakit') . '.css', ['crossorigin=' => 'anonymous'], []);
+            }
+        }
         $html = self::buildModal();
         return $html;
     }
@@ -93,7 +109,7 @@ class IconSelectorField extends FormField {
                     <small class="form-text">'.Text::_('MOD_CUSTOM_QUICKICON_NUMBER_OF_ICONS').': '.count(self::$icons).'</small>
                 </div>     
                 <div class="col text-end">
-                    <small class="form-text">FontAwesome Version: 6.5.1</small>
+                    <small class="form-text">FontAwesome Version: 6.6.0</small>
                 </div>     
             </div>
         </form>';

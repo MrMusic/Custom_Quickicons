@@ -20,6 +20,14 @@ $wa->useScript('core')
 $wa->registerAndUseScript('mod_quickicon', 'mod_quickicon/quickicon.min.js', ['relative' => true, 'version' => 'auto'], ['type' => 'module']);
 $wa->registerAndUseScript('mod_quickicon-es5', 'mod_quickicon/quickicon-es5.min.js', ['relative' => true, 'version' => 'auto'], ['nomodule' => true, 'defer' => true]);
 
+if ($params->get('fakit')) {
+    if ($params->get('fakit_code') == "js") {
+        $wa->registerAndUseScript('fontawesomekit', 'https://kit.fontawesome.com/' . $params->get('fakit') . '.js', ['crossorigin=' => 'anonymous'], []);
+    }
+    if ($params->get('fakit_code') == "css") {
+        $wa->registerAndUseStyle('fontawesomekit', 'https://kit.fontawesome.com/' . $params->get('fakit') . '.css', ['crossorigin=' => 'anonymous'], []);
+    }
+}
 // Get the hue value
 preg_match('#^hsla?\(([0-9]+)[\D]+([0-9]+)[\D]+([0-9]+)[\D]+([0-9](?:.\d+)?)?\)$#i', $params->get('hue', 'hsl(214, 63%, 20%)'), $matches);
 
