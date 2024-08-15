@@ -32,13 +32,14 @@ class IconSelectorField extends FormField {
         $for = $this->id;
 
         $html = '
-            <div class="d-flex">
+            <div class="input-group">
                 <div class="icon-preview">
                     <i data-preview-id="'.$for.'" class="'.$value.'"></i>
                 </div>
                 <button data-for="'.$for.'" class="modal-open-btn btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#FontawesomeModal">'.Text::_('MOD_CUSTOM_QUICKICON_SELECT_ICON').'</button>
+                <input class="quickicon-value-input form-control" type="text" data-id="'.$for.'" id="'.$for.'" data-required="false" name="' . $this->name . '" value="' . $value . '" />
             </div>
-            <input class="icon-value-input" type="hidden" data-id="'.$for.'" id="'.$for.'" data-required="false" name="' . $this->name . '" value="' . $value . '" />';
+            ';
         return $html;
     }
 
