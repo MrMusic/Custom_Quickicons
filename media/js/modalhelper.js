@@ -22,7 +22,7 @@ let previewField = null;
 
 function setIdentifier(row) {
     const identifier = new Date().getTime();
-    row.querySelector('.icon-value-input').setAttribute('data-id', identifier);
+    row.querySelector('.quickicon-value-input').setAttribute('data-id', identifier);
     row.querySelector('.icon-preview i').setAttribute('data-preview-id', identifier);
     row.querySelector('.modal-open-btn').setAttribute('data-for', identifier);
 

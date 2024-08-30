@@ -2,12 +2,12 @@
 <extension type="module" client="administrator" method="upgrade">
     <name>MOD_CUSTOM_QUICKICON</name>
     <author>Joomill Extensions</author>
-    <creationDate>May 2024</creationDate>
+    <creationDate>August 2024</creationDate>
     <copyright>Copyright (C) 2024 Joomill. All rights reserved.</copyright>
     <license>GNU General Public License version 2 or later;</license>
     <authorEmail>info@joomill-extensions.com</authorEmail>
     <authorUrl>https://www.joomill-extensions.com</authorUrl>
-    <version>2.1.2</version>
+    <version>2.2.0</version>
     <description>MOD_CUSTOM_QUICKICON_XML_DESCRIPTION</description>
     <namespace path="src">Joomill\Module\Customquickicon</namespace>
     <files>
@@ -1287,6 +1287,23 @@
                         saveFormat="hsl"
                         default="hsl(214,63%,20%)"
                 />
+                <field
+                        name="fakit"
+                        type="text"
+                        label="MOD_CUSTOM_QUICKICON_FAKIT_LABEL"
+                        default=""
+                />
+                <field
+                        name="fakit_code"
+                        type="radio"
+                        label="MOD_CUSTOM_QUICKICON_FAKIT_CODE_LABEL"
+                        class="btn-group"
+                        default="css"
+                        showon="fakit!:"
+                >
+                    <option value="js">JavaScript</option>
+                    <option value="css">CSS only</option>
+                </field>
                 <field
                     name="layout"
                     type="modulelayout"
