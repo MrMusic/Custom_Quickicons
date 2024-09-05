@@ -2,7 +2,7 @@
 <extension type="module" client="administrator" method="upgrade">
     <name>MOD_CUSTOM_QUICKICON</name>
     <author>Joomill Extensions</author>
-    <creationDate>May 2024</creationDate>
+    <creationDate>August 2024</creationDate>
     <copyright>Copyright (C) 2024 Joomill. All rights reserved.</copyright>
     <license>GNU General Public License version 2 or later;</license>
     <authorEmail>info@joomill-extensions.com</authorEmail>
