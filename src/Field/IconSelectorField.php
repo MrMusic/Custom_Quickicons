@@ -14,6 +14,7 @@ use Joomla\CMS\Factory;
 use Joomla\CMS\Form\FormField;
 use Joomla\CMS\Language\Text;
 use Joomla\CMS\MVC\Model\BaseDatabaseModel;
+use Joomla\Registry\Registry;
 
 // No direct access.
 defined('_JEXEC') or die;
@@ -54,7 +55,7 @@ class IconSelectorField extends FormField {
         $model = BaseDatabaseModel::getInstance('Module', 'ModulesModel');
         $model->setState('module.id', $moduleId);
         $module = $model->getItem();
-        $params = new \JRegistry($module->params);
+        $params = new Registry($module->params);
 
         if ($params->get('fakit')) {
             if ($params->get('fakit_code') == "js") {
