@@ -7,7 +7,7 @@
     <license>GNU General Public License version 2 or later;</license>
     <authorEmail>info@joomill-extensions.com</authorEmail>
     <authorUrl>https://www.joomill-extensions.com</authorUrl>
-    <version>2.2.1</version>
+    <version>2.3.0</version>
     <description>MOD_CUSTOM_QUICKICON_XML_DESCRIPTION</description>
     <namespace path="src">Joomill\Module\Customquickicon</namespace>
     <files>
@@ -335,12 +335,12 @@
                         label="MOD_CUSTOM_QUICKICON_ECOMMERCE_COMPONENT_LABEL"
                         default="HikaShop"
                 >
-                    <option value="DJ-Catalog">DJ-Catalog 2</option>
-                    <option value="EShop">EShop</option>
-                    <option value="HikaShop">HikaShop</option>
-                    <option value="J2Store">J2Store PRO</option>
-                    <option value="PhocaCart">Phoca Cart</option>
-                    <option value="Virtuemart">Virtuemart</option>
+                    <option value="DJ-Catalog">MOD_CUSTOM_QUICKICON_DJCATALOG</option>
+                    <option value="EShop">MOD_CUSTOM_QUICKICON_ESHOP</option>
+                    <option value="HikaShop">MOD_CUSTOM_QUICKICON_HIKASHOP</option>
+                    <option value="J2Store">MOD_CUSTOM_QUICKICON_J2STORE</option>
+                    <option value="PhocaCart">MOD_CUSTOM_QUICKICON_PHOCACART</option>
+                    <option value="Virtuemart">MOD_CUSTOM_QUICKICON_VIRTUEMART</option>
                 </field>
 
 
