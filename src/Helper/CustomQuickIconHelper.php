@@ -245,7 +245,7 @@ class CustomQuickIconHelper
                 }
                 if ($item->article_author) {
                     if ($item->article_author == "current") {
-                        $item->article_author = Factory::getUser()->id;
+                        $item->article_author = Factory::getApplication()->getIdentity()->id;
                     }
                     $quickicon['link'] .= '&filter[author_id]=' . $item->article_author;
                     $quickicon['class'] .= ' quickicon-category-authorid-' . $item->article_author;
