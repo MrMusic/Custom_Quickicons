@@ -52,7 +52,8 @@ class IconSelectorField extends FormField {
 
         $app = Factory::getApplication();
         $moduleId = $app->input->getInt('id');
-        $model = BaseDatabaseModel::getInstance('Module', 'ModulesModel');
+	    $model = $app->bootComponent('com_module')->getMVCFactory()->createModel('Module', 'ModulesModel', []);
+
         $model->setState('module.id', $moduleId);
         $module = $model->getItem();
         $params = new Registry($module->params);
