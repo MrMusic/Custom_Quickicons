@@ -70,7 +70,7 @@ class IconSelectorField extends FormField {
     }
 
     private static function buildModal(){
-        $wa = Factory::getDocument()->getWebAssetManager();
+        $wa = Factory::getApplication()->getDocument()->getWebAssetManager();
         $wa->useScript('bootstrap.modal');
 
         self::$icons = FontawesomeIconsHelper::getIcons();
