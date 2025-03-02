@@ -172,7 +172,7 @@ class CustomQuickIconHelper
             $items = (array)$items;
 
             foreach ($items as $item) {
-                $db = Factory::getDbo();
+                $db = Factory::getContainer()->get('DatabaseDriver');
                 $query = $db->getQuery(true)
                     ->select($db->quoteName('title'))
                     ->from($db->quoteName('#__content'))
@@ -203,7 +203,7 @@ class CustomQuickIconHelper
 
             foreach ($items as $item) {
                 if ($item->article_category != "") {
-                    $db = Factory::getDbo();
+                    $db = Factory::getContainer()->get('DatabaseDriver');
                     $query = $db->getQuery(true)
                         ->select($db->quoteName('title'))
                         ->from($db->quoteName('#__categories'))
@@ -316,7 +316,7 @@ class CustomQuickIconHelper
             $items = (array)$items;
 
             foreach ($items as $item) {
-                $db = Factory::getDbo();
+                $db = Factory::getContainer()->get('DatabaseDriver');
                 $query = $db->getQuery(true)
                     ->select($db->quoteName('title'))
                     ->from($db->quoteName('#__modules'))
