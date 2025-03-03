@@ -172,7 +172,7 @@ class CustomQuickIconHelper
             $items = (array)$items;
 
             foreach ($items as $item) {
-                $db = Factory::getDbo();
+                $db = Factory::getContainer()->get('DatabaseDriver');
                 $query = $db->getQuery(true)
                     ->select($db->quoteName('title'))
                     ->from($db->quoteName('#__content'))
@@ -203,7 +203,7 @@ class CustomQuickIconHelper
 
             foreach ($items as $item) {
                 if ($item->article_category != "") {
-                    $db = Factory::getDbo();
+                    $db = Factory::getContainer()->get('DatabaseDriver');
                     $query = $db->getQuery(true)
                         ->select($db->quoteName('title'))
                         ->from($db->quoteName('#__categories'))
@@ -245,7 +245,7 @@ class CustomQuickIconHelper
                 }
                 if ($item->article_author) {
                     if ($item->article_author == "current") {
-                        $item->article_author = Factory::getUser()->id;
+                        $item->article_author = Factory::getApplication()->getIdentity()->id;
                     }
                     $quickicon['link'] .= '&filter[author_id]=' . $item->article_author;
                     $quickicon['class'] .= ' quickicon-category-authorid-' . $item->article_author;
@@ -316,7 +316,7 @@ class CustomQuickIconHelper
             $items = (array)$items;
 
             foreach ($items as $item) {
-                $db = Factory::getDbo();
+                $db = Factory::getContainer()->get('DatabaseDriver');
                 $query = $db->getQuery(true)
                     ->select($db->quoteName('title'))
                     ->from($db->quoteName('#__modules'))
@@ -1485,6 +1485,7 @@ class CustomQuickIconHelper
                     ];
                 }
             }
+
             // JoomGallery QUICKICONS
                 if ($params->get('show_joomgallery_control_panel')) {
                     $this->buttons[$key][] = [
@@ -1569,7 +1570,121 @@ class CustomQuickIconHelper
                     ];
                 }
 
+            
+            // JOOMSHOPPING QUICKICONS
+            if ($params->get('ecommerce_component') == "Jshopping") {
+                
+                if ($params->get('show_jshopping_orders')) {
+                    $this->buttons[$key][] = [
+                        'image' => 'icon-credit',
+                        'link'  => Route::_('index.php?option=com_jshopping&controller=orders'),
+                        'name'  => 'MOD_CUSTOM_QUICKICON_ORDERS',
+                        'access'  => ['core.manage', 'com_jshopping'],
+                        'class'   => 'quickicon-js quickicon-js-orders',
+                        'group' => $context,
+                    ];
+                }
+            
+                if ($params->get('show_jshopping_products')) {
+                    $this->buttons[$key][] = [
+                        'image'   => 'icon-cubes',
+                        'link'    => Route::_('index.php?option=com_jshopping&controller=products&category_id=0'),
+                        'name'    => 'MOD_CUSTOM_QUICKICON_PRODUCTS',
+                        'access'  => ['core.manage', 'com_jshopping'],
+                        'class'   => 'quickicon-js quickicon-js-products',
+                        'group'   => $context,
+                    ];
+                }
+            
+                if ($params->get('show_jshopping_categories')) {
+                    $this->buttons[$key][] = [
+                        'image'   => 'icon-folder',
+                        'link'    => Route::_('index.php?option=com_jshopping&controller=categories&catid=0'),
+                        'name'    => 'MOD_CUSTOM_QUICKICON_CATEGORIES',
+                        'access'  => ['core.manage', 'com_jshopping'],
+                        'class'   => 'quickicon-js quickicon-js-categories',
+                        'group'   => $context,
+                    ];
+                }
+                        
+                if ($params->get('show_jshopping_users')) {
+                    $this->buttons[$key][] = [
+                        'image' => 'icon-user',
+                        'link'  => Route::_('index.php?option=com_jshopping&controller=users'),
+                        'name'  => 'MOD_CUSTOM_QUICKICON_USERS',
+                        'access'  => ['core.manage', 'com_jshopping'],
+                        'class'   => 'quickicon-js quickicon-js-users',
+                        'group' => $context,
+                    ];
+                }
+            
+                if ($params->get('show_jshopping_manufacturers')) {
+                    $this->buttons[$key][] = [
+                        'image'   => 'fas fa-industry',
+                        'link'    => Route::_('index.php?option=com_jshopping&controller=manufacturers'),
+                        'name'    => 'MOD_CUSTOM_QUICKICON_MANUFACTURERS',
+                        'access'  => ['core.manage', 'com_jshopping'],
+                        'class'   => 'quickicon-js quickicon-js-manufacturers',
+                        'group'   => $context,
+                    ];
+                }
+                                                                
+                if ($params->get('show_jshopping_coupons')) {
+                    $this->buttons[$key][] = [
+                        'image'   => 'icon-tags-2',
+                        'link'    => Route::_('index.php?option=com_jshopping&controller=coupons'),
+                        'name'    => 'MOD_CUSTOM_QUICKICON_COUPONS',
+                        'access'  => ['core.manage', 'com_jshopping'],
+                        'class'   => 'quickicon-js quickicon-js-coupons',
+                        'group'   => $context,
+                    ];
+                }
+                if ($params->get('show_jshopping_options')) {
+                    $this->buttons[$key][] = [
+                        'image'   => 'icon-wrench',
+                        'link'    => Route::_('index.php?option=com_jshopping&controller=other'),
+                        'name'    => 'MOD_CUSTOM_QUICKICON_OPTIONS',
+                        'access'  => ['core.manage', 'com_jshopping'],
+                        'class'   => 'quickicon-js quickicon-js-options',
+                        'group'   => $context,
+                    ];
+                }
+              if ($params->get('show_jshopping_config')) {
+                    $this->buttons[$key][] = [
+                        'image'   => 'icon-cog',
+                        'link'    => Route::_('index.php?option=com_jshopping&controller=config'),
+                        'name'    => 'MOD_CUSTOM_QUICKICON_CONFIG',
+                        'access'  => ['core.manage', 'com_jshopping'],
+                        'class'   => 'quickicon-js quickicon-js-options',
+                        'group'   => $context,
+                    ];
+                }
+                
+            if (file_exists(JPATH_SITE."/components/com_jshopping/addons/addon_jstat/config.xml")) {
 
+                if ($params->get('show_jshopping_statistic')) {
+                    $this->buttons[$key][] = [
+                        'image'   => 'far fa-chart-bar',
+                        'link'    => Route::_('index.php?option=com_jshopping&controller=addon_jstat&view=orders'),
+                        'name'    => 'MOD_CUSTOM_QUICKICON_STATISTIC',
+                        'access'  => ['core.manage', 'com_jshopping'],
+                        'class'   => 'quickicon-js quickicon-js-statistic',
+                        'group'   => $context,
+                    ];
+                }
+            }else{
+                if ($params->get('show_jshopping_statistic')) {
+                    $this->buttons[$key][] = [
+                        'image'   => 'far fa-chart-bar',
+                        'link'    => Route::_('index.php?option=com_jshopping&controller=statistic'),
+                        'name'    => 'MOD_CUSTOM_QUICKICON_STATISTIC',
+                        'access'  => ['core.manage', 'com_jshopping'],
+                        'class'   => 'quickicon-js quickicon-js-statistic',
+                        'group'   => $context,
+                    ];
+                }
+            }
+            }
 
 
             // CUSTOM QUICKICONS

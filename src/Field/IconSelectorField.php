@@ -52,7 +52,8 @@ class IconSelectorField extends FormField {
 
         $app = Factory::getApplication();
         $moduleId = $app->input->getInt('id');
-        $model = BaseDatabaseModel::getInstance('Module', 'ModulesModel');
+	    $model = $app->bootComponent('com_module')->getMVCFactory()->createModel('Module', 'ModulesModel', []);
+
         $model->setState('module.id', $moduleId);
         $module = $model->getItem();
         $params = new Registry($module->params);
@@ -70,7 +71,7 @@ class IconSelectorField extends FormField {
     }
 
     private static function buildModal(){
-        $wa = Factory::getDocument()->getWebAssetManager();
+        $wa = Factory::getApplication()->getDocument()->getWebAssetManager();
         $wa->useScript('bootstrap.modal');
 
         self::$icons = FontawesomeIconsHelper::getIcons();
