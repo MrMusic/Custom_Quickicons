@@ -2,12 +2,12 @@
 <extension type="module" client="administrator" method="upgrade">
     <name>MOD_CUSTOM_QUICKICON</name>
     <author>Joomill Extensions</author>
-    <creationDate>March 2025</creationDate>
+    <creationDate>June 2025</creationDate>
     <copyright>Copyright (C) 2025 Joomill. All rights reserved.</copyright>
     <license>GNU General Public License version 2 or later;</license>
     <authorEmail>info@joomill-extensions.com</authorEmail>
     <authorUrl>https://www.joomill-extensions.com</authorUrl>
-    <version>2.4.1</version>
+    <version>2.4.1.1</version>
     <description>MOD_CUSTOM_QUICKICON_XML_DESCRIPTION</description>
     <namespace path="src">Joomill\Module\Customquickicon</namespace>
     <files>
